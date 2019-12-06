@@ -8,16 +8,35 @@
 
 import UIKit
 import CoreHaptics
+import WebKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKUIDelegate {
     
     var engine: CHHapticEngine!
     var player: CHHapticPatternPlayer!
     var supportsHaptics: Bool = false
+    var webView: WKWebView!
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // Testing WebView
+        super.viewDidLoad()
+        
+        // this URL can be your local testing url like
+        // http://10.0.0.253:8080
+        let myURL = URL(string:"https://phet-dev.colorado.edu/html/energy-skate-park/1.0.0-dev.5/phet/energy-skate-park_en_phet.html")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load( myRequest )
+
+        // Testing Haptics
         
         // Check if the device supports haptics.
         let hapticCapability = CHHapticEngine.capabilitiesForHardware()
