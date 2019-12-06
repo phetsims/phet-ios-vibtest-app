@@ -1,0 +1,589 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E9E02A4239AFEEB00E79BA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02A3239AFEEB00E79BA0 /* AppDelegate.swift */; };
+		5E9E02A6239AFEEB00E79BA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02A5239AFEEB00E79BA0 /* SceneDelegate.swift */; };
+		5E9E02A8239AFEEB00E79BA0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02A7239AFEEB00E79BA0 /* ViewController.swift */; };
+		5E9E02AB239AFEEB00E79BA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9E02A9239AFEEB00E79BA0 /* Main.storyboard */; };
+		5E9E02AD239AFEEF00E79BA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E9E02AC239AFEEF00E79BA0 /* Assets.xcassets */; };
+		5E9E02B0239AFEEF00E79BA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9E02AE239AFEEF00E79BA0 /* LaunchScreen.storyboard */; };
+		5E9E02BB239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02BA239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift */; };
+		5E9E02C6239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02C5239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5E9E02B7239AFEEF00E79BA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E9E0298239AFEEB00E79BA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E9E029F239AFEEB00E79BA0;
+			remoteInfo = "phet-ios-vibtest-app";
+		};
+		5E9E02C2239AFEEF00E79BA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E9E0298239AFEEB00E79BA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E9E029F239AFEEB00E79BA0;
+			remoteInfo = "phet-ios-vibtest-app";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5E9E02A0239AFEEB00E79BA0 /* phet-ios-vibtest-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "phet-ios-vibtest-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E9E02A3239AFEEB00E79BA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E9E02A5239AFEEB00E79BA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5E9E02A7239AFEEB00E79BA0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5E9E02AA239AFEEB00E79BA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5E9E02AC239AFEEF00E79BA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E9E02AF239AFEEF00E79BA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5E9E02B1239AFEEF00E79BA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E9E02B6239AFEEF00E79BA0 /* phet-ios-vibtest-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "phet-ios-vibtest-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E9E02BA239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = phet_ios_vibtest_appTests.swift; sourceTree = "<group>"; };
+		5E9E02BC239AFEEF00E79BA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E9E02C1239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "phet-ios-vibtest-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E9E02C5239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = phet_ios_vibtest_appUITests.swift; sourceTree = "<group>"; };
+		5E9E02C7239AFEEF00E79BA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E9E029D239AFEEB00E79BA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E9E02B3239AFEEF00E79BA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E9E02BE239AFEEF00E79BA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E9E0297239AFEEB00E79BA0 = {
+			isa = PBXGroup;
+			children = (
+				5E9E02A2239AFEEB00E79BA0 /* phet-ios-vibtest-app */,
+				5E9E02B9239AFEEF00E79BA0 /* phet-ios-vibtest-appTests */,
+				5E9E02C4239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests */,
+				5E9E02A1239AFEEB00E79BA0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5E9E02A1239AFEEB00E79BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E9E02A0239AFEEB00E79BA0 /* phet-ios-vibtest-app.app */,
+				5E9E02B6239AFEEF00E79BA0 /* phet-ios-vibtest-appTests.xctest */,
+				5E9E02C1239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E9E02A2239AFEEB00E79BA0 /* phet-ios-vibtest-app */ = {
+			isa = PBXGroup;
+			children = (
+				5E9E02A3239AFEEB00E79BA0 /* AppDelegate.swift */,
+				5E9E02A5239AFEEB00E79BA0 /* SceneDelegate.swift */,
+				5E9E02A7239AFEEB00E79BA0 /* ViewController.swift */,
+				5E9E02A9239AFEEB00E79BA0 /* Main.storyboard */,
+				5E9E02AC239AFEEF00E79BA0 /* Assets.xcassets */,
+				5E9E02AE239AFEEF00E79BA0 /* LaunchScreen.storyboard */,
+				5E9E02B1239AFEEF00E79BA0 /* Info.plist */,
+			);
+			path = "phet-ios-vibtest-app";
+			sourceTree = "<group>";
+		};
+		5E9E02B9239AFEEF00E79BA0 /* phet-ios-vibtest-appTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E9E02BA239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift */,
+				5E9E02BC239AFEEF00E79BA0 /* Info.plist */,
+			);
+			path = "phet-ios-vibtest-appTests";
+			sourceTree = "<group>";
+		};
+		5E9E02C4239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5E9E02C5239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift */,
+				5E9E02C7239AFEEF00E79BA0 /* Info.plist */,
+			);
+			path = "phet-ios-vibtest-appUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E9E029F239AFEEB00E79BA0 /* phet-ios-vibtest-app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E9E02CA239AFEEF00E79BA0 /* Build configuration list for PBXNativeTarget "phet-ios-vibtest-app" */;
+			buildPhases = (
+				5E9E029C239AFEEB00E79BA0 /* Sources */,
+				5E9E029D239AFEEB00E79BA0 /* Frameworks */,
+				5E9E029E239AFEEB00E79BA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "phet-ios-vibtest-app";
+			productName = "phet-ios-vibtest-app";
+			productReference = 5E9E02A0239AFEEB00E79BA0 /* phet-ios-vibtest-app.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5E9E02B5239AFEEF00E79BA0 /* phet-ios-vibtest-appTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E9E02CD239AFEEF00E79BA0 /* Build configuration list for PBXNativeTarget "phet-ios-vibtest-appTests" */;
+			buildPhases = (
+				5E9E02B2239AFEEF00E79BA0 /* Sources */,
+				5E9E02B3239AFEEF00E79BA0 /* Frameworks */,
+				5E9E02B4239AFEEF00E79BA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E9E02B8239AFEEF00E79BA0 /* PBXTargetDependency */,
+			);
+			name = "phet-ios-vibtest-appTests";
+			productName = "phet-ios-vibtest-appTests";
+			productReference = 5E9E02B6239AFEEF00E79BA0 /* phet-ios-vibtest-appTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5E9E02C0239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E9E02D0239AFEEF00E79BA0 /* Build configuration list for PBXNativeTarget "phet-ios-vibtest-appUITests" */;
+			buildPhases = (
+				5E9E02BD239AFEEF00E79BA0 /* Sources */,
+				5E9E02BE239AFEEF00E79BA0 /* Frameworks */,
+				5E9E02BF239AFEEF00E79BA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E9E02C3239AFEEF00E79BA0 /* PBXTargetDependency */,
+			);
+			name = "phet-ios-vibtest-appUITests";
+			productName = "phet-ios-vibtest-appUITests";
+			productReference = 5E9E02C1239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E9E0298239AFEEB00E79BA0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = phet;
+				TargetAttributes = {
+					5E9E029F239AFEEB00E79BA0 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					5E9E02B5239AFEEF00E79BA0 = {
+						CreatedOnToolsVersion = 11.2.1;
+						TestTargetID = 5E9E029F239AFEEB00E79BA0;
+					};
+					5E9E02C0239AFEEF00E79BA0 = {
+						CreatedOnToolsVersion = 11.2.1;
+						TestTargetID = 5E9E029F239AFEEB00E79BA0;
+					};
+				};
+			};
+			buildConfigurationList = 5E9E029B239AFEEB00E79BA0 /* Build configuration list for PBXProject "phet-ios-vibtest-app" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5E9E0297239AFEEB00E79BA0;
+			productRefGroup = 5E9E02A1239AFEEB00E79BA0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E9E029F239AFEEB00E79BA0 /* phet-ios-vibtest-app */,
+				5E9E02B5239AFEEF00E79BA0 /* phet-ios-vibtest-appTests */,
+				5E9E02C0239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5E9E029E239AFEEB00E79BA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E9E02B0239AFEEF00E79BA0 /* LaunchScreen.storyboard in Resources */,
+				5E9E02AD239AFEEF00E79BA0 /* Assets.xcassets in Resources */,
+				5E9E02AB239AFEEB00E79BA0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E9E02B4239AFEEF00E79BA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E9E02BF239AFEEF00E79BA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E9E029C239AFEEB00E79BA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E9E02A8239AFEEB00E79BA0 /* ViewController.swift in Sources */,
+				5E9E02A4239AFEEB00E79BA0 /* AppDelegate.swift in Sources */,
+				5E9E02A6239AFEEB00E79BA0 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E9E02B2239AFEEF00E79BA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E9E02BB239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E9E02BD239AFEEF00E79BA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E9E02C6239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5E9E02B8239AFEEF00E79BA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E9E029F239AFEEB00E79BA0 /* phet-ios-vibtest-app */;
+			targetProxy = 5E9E02B7239AFEEF00E79BA0 /* PBXContainerItemProxy */;
+		};
+		5E9E02C3239AFEEF00E79BA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E9E029F239AFEEB00E79BA0 /* phet-ios-vibtest-app */;
+			targetProxy = 5E9E02C2239AFEEF00E79BA0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5E9E02A9239AFEEB00E79BA0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E9E02AA239AFEEB00E79BA0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5E9E02AE239AFEEF00E79BA0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E9E02AF239AFEEF00E79BA0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5E9E02C8239AFEEF00E79BA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5E9E02C9239AFEEF00E79BA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E9E02CB239AFEEF00E79BA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "phet-ios-vibtest-app/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5E9E02CC239AFEEF00E79BA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "phet-ios-vibtest-app/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5E9E02CE239AFEEF00E79BA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "phet-ios-vibtest-appTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/phet-ios-vibtest-app.app/phet-ios-vibtest-app";
+			};
+			name = Debug;
+		};
+		5E9E02CF239AFEEF00E79BA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "phet-ios-vibtest-appTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/phet-ios-vibtest-app.app/phet-ios-vibtest-app";
+			};
+			name = Release;
+		};
+		5E9E02D1239AFEEF00E79BA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "phet-ios-vibtest-appUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "phet-ios-vibtest-app";
+			};
+			name = Debug;
+		};
+		5E9E02D2239AFEEF00E79BA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "phet-ios-vibtest-appUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "phet-ios-vibtest-app";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E9E029B239AFEEB00E79BA0 /* Build configuration list for PBXProject "phet-ios-vibtest-app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E9E02C8239AFEEF00E79BA0 /* Debug */,
+				5E9E02C9239AFEEF00E79BA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E9E02CA239AFEEF00E79BA0 /* Build configuration list for PBXNativeTarget "phet-ios-vibtest-app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E9E02CB239AFEEF00E79BA0 /* Debug */,
+				5E9E02CC239AFEEF00E79BA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E9E02CD239AFEEF00E79BA0 /* Build configuration list for PBXNativeTarget "phet-ios-vibtest-appTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E9E02CE239AFEEF00E79BA0 /* Debug */,
+				5E9E02CF239AFEEF00E79BA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E9E02D0239AFEEF00E79BA0 /* Build configuration list for PBXNativeTarget "phet-ios-vibtest-appUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E9E02D1239AFEEF00E79BA0 /* Debug */,
+				5E9E02D2239AFEEF00E79BA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5E9E0298239AFEEB00E79BA0 /* Project object */;
+}
