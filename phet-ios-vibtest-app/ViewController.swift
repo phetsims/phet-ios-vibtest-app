@@ -9,6 +9,7 @@
 import UIKit
 import CoreHaptics
 import WebKit
+import AudioToolbox.AudioServices
 
 class ViewController: UIViewController, WKUIDelegate {
     
@@ -17,24 +18,24 @@ class ViewController: UIViewController, WKUIDelegate {
     var supportsHaptics: Bool = false
     var webView: WKWebView!
     
-    override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        view = webView
-    }
+//    override func loadView() {
+//        let webConfiguration = WKWebViewConfiguration()
+//        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+//        webView.uiDelegate = self
+//        view = webView
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Testing WebView
-        super.viewDidLoad()
+//        super.viewDidLoad()
         
         // this URL can be your local testing url like
         // http://10.0.0.253:8080
-        let myURL = URL(string:"https://phet-dev.colorado.edu/html/energy-skate-park/1.0.0-dev.5/phet/energy-skate-park_en_phet.html")
-        let myRequest = URLRequest(url: myURL!)
-        webView.load( myRequest )
+//        let myURL = URL(string:"https://phet-dev.colorado.edu/html/energy-skate-park/1.0.0-dev.5/phet/energy-skate-park_en_phet.html")
+//        let myRequest = URLRequest(url: myURL!)
+//        webView.load( myRequest )
 
         // Testing Haptics
         
@@ -112,6 +113,12 @@ class ViewController: UIViewController, WKUIDelegate {
             
             engine.stop(completionHandler: nil)
         }
+        
+        // This old version of haptics works on iPhone7 plus.
+        // iPhone7 plus may not support Corehaptics
+        // kSystemSoundID_Vibrate is just a UInt32 with a value of 4095
+        let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
+        AudioServicesPlaySystemSound(vibrate)
     }
 }
 
