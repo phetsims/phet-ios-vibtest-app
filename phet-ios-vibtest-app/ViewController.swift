@@ -11,7 +11,7 @@ import CoreHaptics
 import WebKit
 import AudioToolbox.AudioServices
 
-class ViewController: UIViewController, WKUIDelegate {
+class ViewController: UIViewController {
     
     var engine: CHHapticEngine!
     var player: CHHapticPatternPlayer!
@@ -29,11 +29,35 @@ class ViewController: UIViewController, WKUIDelegate {
         super.viewDidLoad()
         
         // Testing WebView
-//        super.viewDidLoad()
+        super.viewDidLoad()
         
-        // this URL can be your local testing url like
-        // http://10.0.0.253:8080
-//        let myURL = URL(string:"https://phet-dev.colorado.edu/html/energy-skate-park/1.0.0-dev.5/phet/energy-skate-park_en_phet.html")
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+//        webView.uiDelegate = self
+//        view = webView
+        let userContentController = WKUserContentController()
+
+        view.addSubview(webView)
+
+        let layoutGuide = view.safeAreaLayoutGuide
+
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
+
+        if let url = URL(string: "http://192.168.1.7:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
+            webView.load(URLRequest(url: url))
+        }
+
+        userContentController.add(self, name: "test")
+
+        webConfiguration.userContentController = userContentController
+        
+//         this URL can be your local testing url like
+//         http://10.0.0.253:8080
+//        let myURL = URL(string:"http://192.168.1.7:8080/phet-ios-vibtest-app/vibtest-embedded.html")
 //        let myRequest = URLRequest(url: myURL!)
 //        webView.load( myRequest )
 
@@ -117,8 +141,16 @@ class ViewController: UIViewController, WKUIDelegate {
         // This old version of haptics works on iPhone7 plus.
         // iPhone7 plus may not support Corehaptics
         // kSystemSoundID_Vibrate is just a UInt32 with a value of 4095
-        let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
-        AudioServicesPlaySystemSound(vibrate)
+//        let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
+//        AudioServicesPlaySystemSound(vibrate)
     }
+}
+
+extension ViewController: WKScriptMessageHandler {
+  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+      if message.name == "test", let messageBody = message.body as? String {
+          print(messageBody)
+      }
+  }
 }
 
