@@ -11,31 +11,22 @@ import CoreHaptics
 import WebKit
 import AudioToolbox.AudioServices
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKUIDelegate {
     
     var engine: CHHapticEngine!
     var player: CHHapticPatternPlayer!
     var supportsHaptics: Bool = false
     var webView: WKWebView!
-    
-//    override func loadView() {
-//        let webConfiguration = WKWebViewConfiguration()
-//        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-//        webView.uiDelegate = self
-//        view = webView
-//    }
+    let doStuffMessageHandler = "doStuffMessageHandler"
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         // Testing WebView
         super.viewDidLoad()
         
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-//        webView.uiDelegate = self
-//        view = webView
-        let userContentController = WKUserContentController()
+        let configuration = WKWebViewConfiguration();
+        configuration.userContentController.add( self, name: doStuffMessageHandler )
+        let webView = WKWebView( frame: .zero, configuration: configuration )
 
         view.addSubview(webView)
 
@@ -47,19 +38,9 @@ class ViewController: UIViewController {
         webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
 
-        if let url = URL(string: "http://192.168.1.7:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
+        if let url = URL(string: "http://127.0.0.1:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
             webView.load(URLRequest(url: url))
         }
-
-        userContentController.add(self, name: "test")
-
-        webConfiguration.userContentController = userContentController
-        
-//         this URL can be your local testing url like
-//         http://10.0.0.253:8080
-//        let myURL = URL(string:"http://192.168.1.7:8080/phet-ios-vibtest-app/vibtest-embedded.html")
-//        let myRequest = URLRequest(url: myURL!)
-//        webView.load( myRequest )
 
         // Testing Haptics
         
@@ -148,9 +129,15 @@ class ViewController: UIViewController {
 
 extension ViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-      if message.name == "test", let messageBody = message.body as? String {
-          print(messageBody)
-      }
+    if message.name == doStuffMessageHandler {
+        guard let dict = message.body as? [String: AnyObject],
+            let param1 = dict["param1"] as? String,
+            let param2 = dict["param2"] as? Int else {
+                return
+        }
+        print( param1 );
+        print( param2 );
+    }
   }
 }
 
