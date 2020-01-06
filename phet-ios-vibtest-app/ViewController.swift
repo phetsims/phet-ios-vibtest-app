@@ -38,7 +38,11 @@ class ViewController: UIViewController, WKUIDelegate {
         webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
 
-        if let url = URL(string: "http://127.0.0.1:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
+        //Jesse's info
+        //if let url = URL(string: "http://127.0.0.1:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
+        
+        //Jen's info
+        if let url = URL(string: "http://192.168.1.5:8080/phet-ios-vibtest-app/vibtest-embedded.html?test") {
             webView.load(URLRequest(url: url))
         }
 
@@ -103,6 +107,23 @@ class ViewController: UIViewController, WKUIDelegate {
             }
         }
     }
+    
+    // Vibrate iPhone7+
+    // This old version of haptics works only on iPhone7+.
+    // iPhone7+ does not support Corehaptics
+    // kSystemSoundID_Vibrate is just a UInt32 with a value of 4095
+    // PHONE MUST BE OFF MUTE TO WORK
+    func vibratePhone(para: String){
+        if (para == "stuff") {
+            //print("Wants to vibrate");
+            let vibrate = SystemSoundID(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(vibrate);
+            
+            //Check if vibrated
+            AudioServicesPlaySystemSoundWithCompletion(vibrate, {
+                print("did vibrate")});
+        }
+    }
 
 
     @IBAction func btn(_ sender: Any) {
@@ -118,15 +139,11 @@ class ViewController: UIViewController, WKUIDelegate {
             
             engine.stop(completionHandler: nil)
         }
-        
-        // This old version of haptics works on iPhone7 plus.
-        // iPhone7 plus may not support Corehaptics
-        // kSystemSoundID_Vibrate is just a UInt32 with a value of 4095
-//        let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
-//        AudioServicesPlaySystemSound(vibrate)
     }
 }
 
+// Communicate with javascript through Webkit
+// Obtains a message sent from javascript and records it
 extension ViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
     if message.name == doStuffMessageHandler {
@@ -137,7 +154,14 @@ extension ViewController: WKScriptMessageHandler {
         }
         print( param1 );
         print( param2 );
+        
+        // Send the message to another func
+        vibratePhone(para: param1);
     }
+    
+    
+    
   }
 }
+
 
