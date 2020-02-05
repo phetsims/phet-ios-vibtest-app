@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:phet-ios-vibtest-app.xcodeproj">
+      location = "group:/Users/jen10/Phet/phet-ios-vibtest-app/phet-ios-vibtest-app/VibrationManager.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

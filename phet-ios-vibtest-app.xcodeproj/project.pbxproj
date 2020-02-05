@@ -15,7 +15,8 @@
 		5E9E02B0239AFEEF00E79BA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9E02AE239AFEEF00E79BA0 /* LaunchScreen.storyboard */; };
 		5E9E02BB239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02BA239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift */; };
 		5E9E02C6239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02C5239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift */; };
-		91B19EA223EB31A700E95186 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B19EA123EB31A700E95186 /* VibrationManager.swift */; };
+		91B19EA823EB3AB800E95186 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 91B19EA723EB3AB800E95186 /* Base.lproj */; };
+		91B19EAE23EB3C5300E95186 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B19EAD23EB3C5300E95186 /* VibrationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,8 @@
 		5E9E02C1239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "phet-ios-vibtest-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E9E02C5239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = phet_ios_vibtest_appUITests.swift; sourceTree = "<group>"; };
 		5E9E02C7239AFEEF00E79BA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		91B19EA123EB31A700E95186 /* VibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VibrationManager.swift; path = ../../../Downloads/vibrationAPI/vibrationAPI/VibrationManager.swift; sourceTree = "<group>"; };
+		91B19EA723EB3AB800E95186 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
+		91B19EAD23EB3C5300E95186 /* VibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +105,9 @@
 			children = (
 				5E9E02A3239AFEEB00E79BA0 /* AppDelegate.swift */,
 				5E9E02A5239AFEEB00E79BA0 /* SceneDelegate.swift */,
+				91B19EAD23EB3C5300E95186 /* VibrationManager.swift */,
 				5E9E02A7239AFEEB00E79BA0 /* ViewController.swift */,
-				91B19EA123EB31A700E95186 /* VibrationManager.swift */,
+				91B19EA723EB3AB800E95186 /* Base.lproj */,
 				5E9E02A9239AFEEB00E79BA0 /* Main.storyboard */,
 				5E9E02AC239AFEEF00E79BA0 /* Assets.xcassets */,
 				5E9E02AE239AFEEF00E79BA0 /* LaunchScreen.storyboard */,
@@ -236,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E9E02B0239AFEEF00E79BA0 /* LaunchScreen.storyboard in Resources */,
+				91B19EA823EB3AB800E95186 /* Base.lproj in Resources */,
 				5E9E02AD239AFEEF00E79BA0 /* Assets.xcassets in Resources */,
 				5E9E02AB239AFEEB00E79BA0 /* Main.storyboard in Resources */,
 			);
@@ -264,7 +268,7 @@
 			files = (
 				5E9E02A8239AFEEB00E79BA0 /* ViewController.swift in Sources */,
 				5E9E02A4239AFEEB00E79BA0 /* AppDelegate.swift in Sources */,
-				91B19EA223EB31A700E95186 /* VibrationManager.swift in Sources */,
+				91B19EAE23EB3C5300E95186 /* VibrationManager.swift in Sources */,
 				5E9E02A6239AFEEB00E79BA0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
