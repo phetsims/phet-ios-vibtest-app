@@ -14,8 +14,6 @@ import AudioToolbox.AudioServices
 class ViewController: UIViewController, WKUIDelegate {
     
     var engine: CHHapticEngine!
-    var pulsePatternsDict: NSMutableDictionary
-    var pulsePatternsArray: NSMutableArray
     var player: CHHapticPatternPlayer!
     var supportsHaptics: Bool = false
     var webView: WKWebView!
@@ -44,7 +42,7 @@ class ViewController: UIViewController, WKUIDelegate {
         //if let url = URL(string: "http://127.0.0.1:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
         
         //Jen's info
-        if let url = URL(string: "http://192.168.1.5:8080/john-travoltage/john-travoltage_en.html") {
+        if let url = URL(string: "http://192.168.1.5:8080/phet-ios-vibtest-app/vibtest-embedded.html?test") {
             webView.load(URLRequest(url: url))
         }
 
@@ -116,36 +114,6 @@ class ViewController: UIViewController, WKUIDelegate {
     // kSystemSoundID_Vibrate is just a UInt32 with a value of 4095
     // PHONE MUST BE OFF MUTE TO WORK
     func vibratePhone(para: String){
-        //NSMutableDictionary pulsePatternsDict = [@{} mutableCopy];
-        //NSMutableArray* pulsePatternsArray = [@[] mutableCopy];
-
-        // beat for 100 times
-        for index in 1...100 {
-            pulsePatternsArray.add(true); // vibrate for 100ms
-            pulsePatternsArray.add(100);
-            pulsePatternsArray.add(false);
-            pulsePatternsArray.add(1200*0.3);
-            
-            pulsePatternsArray.add(true); // vibrate for 100ms
-            pulsePatternsArray.add(100);
-            pulsePatternsArray.add(false);
-            pulsePatternsArray.add(1200*0.3);
-            
-            pulsePatternsArray.add(true); // vibrate for 100ms
-            pulsePatternsArray.add(100);
-            pulsePatternsArray.add(false);
-            pulsePatternsArray.add(1200*0.3);
-        }
-        
-        pulsePatternsDict["VibePattern"] = pulsePatternsArray;
-        pulsePatternsDict["Intensity"] = 1.0
-
-//        [pulsePatternsDict setObject:pulsePatternsArray forKey:@"VibePattern"];
-//        [pulsePatternsDict setObject:[NSNumber numberWithInt:1.0] forKey:@"Intensity"];
-
-        AudioServicesPlaySystemSoundWithVibration(kSystemSoundID_Vibrate, nil, pulsePatternsDict);
-        
-        
         if (para == "stuff") {
             //print("Wants to vibrate");
             let vibrate = SystemSoundID(kSystemSoundID_Vibrate);
