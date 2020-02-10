@@ -52,7 +52,7 @@ class ViewController: UIViewController, WKUIDelegate {
         
         //Jen's info
 //        if let url = URL(string: "http://10.178.13.127:8080//phet-ios-vibtest-app/vibtest-embedded.html?test") {
-        if let url = URL(string: "http://10.178.13.241:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea") {
+        if let url = URL(string: "http://127.0.0.1:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea&sound=disabled") {
             webView.load(URLRequest(url: url))
         }
 
