@@ -17,11 +17,7 @@ class ViewController: UIViewController, WKUIDelegate {
     var player: CHHapticPatternPlayer!
     var supportsHaptics: Bool = false
     var webView: WKWebView!
-    let vibrateMessageHandler = "vibrateMessageHandler"
-    let vibrateForeverMessageHandler = "vibrateForeverMessageHandler"
-    let vibrateFrequencyMessageHandler = "vibrateFrequencyMessageHandler"
-    let vibrateFrequencyForeverMessageHandler = "vibrateFrequencyForeverMessageHandler"
-    let stopMessageHandler = "stopMessageHandler"
+    let doStuffMessageHandler = "doStuffMessageHandler"
     private var VibrationMan: VibrationManager?
 
     override func viewDidLoad() {
@@ -30,11 +26,7 @@ class ViewController: UIViewController, WKUIDelegate {
         super.viewDidLoad()
         
         let configuration = WKWebViewConfiguration();
-        configuration.userContentController.add( self, name: vibrateMessageHandler )
-        configuration.userContentController.add( self, name: vibrateForeverMessageHandler )
-        configuration.userContentController.add( self, name: vibrateFrequencyMessageHandler )
-        configuration.userContentController.add( self, name: vibrateFrequencyForeverMessageHandler )
-        configuration.userContentController.add( self, name: stopMessageHandler )
+        configuration.userContentController.add( self, name: doStuffMessageHandler )
         let webView = WKWebView( frame: .zero, configuration: configuration )
 
         view.addSubview(webView)
@@ -52,7 +44,7 @@ class ViewController: UIViewController, WKUIDelegate {
         
         //Jen's info
 //        if let url = URL(string: "http://10.178.13.127:8080//phet-ios-vibtest-app/vibtest-embedded.html?test") {
-        if let url = URL(string: "http://10.178.13.241:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea") {
+        if let url = URL(string: "http://10.178.13.127:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea") {
             webView.load(URLRequest(url: url))
         }
 
@@ -63,7 +55,7 @@ class ViewController: UIViewController, WKUIDelegate {
         supportsHaptics = hapticCapability.supportsHaptics
         
         // Core haptics
-        if (supportsHaptics) {
+        if supportsHaptics {
             VibrationMan = VibrationManager()
         }
     }
@@ -92,50 +84,22 @@ class ViewController: UIViewController, WKUIDelegate {
 // Obtains a message sent from javascript and records it
 extension ViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    if message.name == vibrateMessageHandler {
+    if message.name == doStuffMessageHandler {
         guard let dict = message.body as? [String: AnyObject],
-            let duration = dict["duration"] as? Double else {
-                return
-            }
-        
-        print("vibrate(duration): \(duration)")
-        
-        VibrationMan?.vibrate(seconds: duration)
-        }
-    
-    if message.name == vibrateForeverMessageHandler {
-        VibrationMan?.vibrateForever()
-        print("vibrateForever(): OK")
-    }
-    
-    if message.name == vibrateFrequencyMessageHandler {
-        guard let dict = message.body as? [String: AnyObject],
-            let frequency = dict["frequency"] as? Double,
-            let duration = dict["duration"] as? Double else {
+            let param1 = dict["param1"] as? String,
+            let param2 = dict["param2"] as? Int else {
                 return
         }
-    
-        print("vibrateAtFrequency(duration, frequency): \(duration), \(frequency)")
-        VibrationMan?.vibrateAtFrequency(seconds: duration, frequency: frequency)
-    }
-    
-    if message.name == vibrateFrequencyForeverMessageHandler {
-        guard let dict = message.body as? [String: AnyObject],
-            let frequency = dict["frequency"] as? Double else {
-                return
-        }
+        print( param1 );
+        print( param2 );
         
-        
-        print("vibrateAtFrequencyForever(frequency): \(frequency)")
-        VibrationMan?.vibrateAtFrequencyForever(frequency: frequency)
+        // Send the message to another func
+        vibratePhone(para: param1);
     }
     
-        if message.name == stopMessageHandler {
-            print("stop(): OK")
-            VibrationMan?.stop()
-        }
-    }
     
+    
+  }
 }
 
 
