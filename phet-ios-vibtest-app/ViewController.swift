@@ -12,7 +12,7 @@ import WebKit
 import AudioToolbox.AudioServices
 
 class ViewController: UIViewController, WKUIDelegate {
-    
+
     var engine: CHHapticEngine!
     var player: CHHapticPatternPlayer!
     var supportsHaptics: Bool = false
@@ -21,10 +21,10 @@ class ViewController: UIViewController, WKUIDelegate {
     private var VibrationMan: VibrationManager?
 
     override func viewDidLoad() {
-        
+
         // Testing WebView
         super.viewDidLoad()
-        
+
         let configuration = WKWebViewConfiguration();
         configuration.userContentController.add( self, name: doStuffMessageHandler )
         let webView = WKWebView( frame: .zero, configuration: configuration )
@@ -41,30 +41,30 @@ class ViewController: UIViewController, WKUIDelegate {
 
         //Jesse's info
         //if let url = URL(string: "http://127.0.0.1:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
-        
+
         //Jen's info
 //        if let url = URL(string: "http://10.178.13.127:8080//phet-ios-vibtest-app/vibtest-embedded.html?test") {
-        if let url = URL(string: "http://10.178.13.127:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea") {
+        if let url = URL(string: "http://127.0.0.1:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea&sound=disabled") {
             webView.load(URLRequest(url: url))
         }
 
         // Testing Haptics
-        
+
         // Check if the device supports haptics.
         let hapticCapability = CHHapticEngine.capabilitiesForHardware()
         supportsHaptics = hapticCapability.supportsHaptics
-        
+
         // Core haptics
         if supportsHaptics {
             VibrationMan = VibrationManager()
         }
     }
-    
+
     // Vibrate iPhone8+
     // PHONE MUST BE OFF MUTE TO WORK
     func vibratePhone(para: String){
         if (para == "stuff") {
-            
+
             VibrationMan?.vibrateAtFrequencyForever(frequency: 25)
         }
     }
@@ -72,7 +72,7 @@ class ViewController: UIViewController, WKUIDelegate {
 
     @IBAction func btn(_ sender: Any) {
         print("HEYO");
-        
+
         if ( supportsHaptics ) {
             //engine.start(completionHandler:nil)
             VibrationMan?.vibrateAtFrequencyForever(frequency: 25)
@@ -92,14 +92,12 @@ extension ViewController: WKScriptMessageHandler {
         }
         print( param1 );
         print( param2 );
-        
+
         // Send the message to another func
         vibratePhone(para: param1);
     }
-    
-    
-    
+
+
+
   }
 }
-
-
