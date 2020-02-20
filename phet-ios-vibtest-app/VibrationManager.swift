@@ -348,7 +348,59 @@ public class VibrationManager {
              print("Pattern Player Creation Error: \(error)")
          }
     }
+    
+    public func vibrateWithCustomPattern( vibrationPattern: [Double], seconds: Double, loopForever: Bool ){
+        
+        init_engine()
+        
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
 
+        var relativeTime = 0.0;
+        var hapticEvents: [CHHapticEvent] = [];
+        for element in vibrationPattern {
+            let index: Int! = vibrationPattern.firstIndex(of: element );
+            
+            let isEven: Bool = index % 2 == 0;
+            var intensity: CHHapticEventParameter;
+            if ( isEven ) {
+                intensity = on_intensity
+            }
+            else {
+                intensity = off_intensity;
+            }
+            hapticEvents.append( CHHapticEvent(  eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: relativeTime, duration: element / 1000 ) );
+            
+            relativeTime += element / 1000;
+        }
+        
+        var pattern: CHHapticPattern;
+        do {
+           pattern = try CHHapticPattern(events: hapticEvents, parameters: [])
+            
+            // Create a player from the continuous haptic pattern.
+            let continuousPlayer = try engine.makeAdvancedPlayer(with: pattern)
+            
+            continuousPlayer.loopEnabled = true
+            try continuousPlayer.start(atTime: 0)
+            
+            Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
+                if !loopForever {
+                   continuousPlayer.loopEnabled = false
+                }
+            }
+        }
+        catch {
+            print("Pattern Creation Error: \(error)")
+        }
+    }
+    
+    func vibrateWithCustomPattern( vibrationPattern: [Double], seconds: Double ) {
+        vibrateWithCustomPattern( vibrationPattern: vibrationPattern, seconds: seconds, loopForever: false );
+    }
+    
+    func vibrateWithCustomPatternForever( vibrationPattern: [Double] ) {
+        vibrateWithCustomPattern( vibrationPattern: vibrationPattern, seconds: 300, loopForever: true );
+    }
     
     public func stop() {
         if engine != nil{

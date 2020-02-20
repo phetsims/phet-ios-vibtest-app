@@ -22,6 +22,9 @@ class ViewController: UIViewController, WKUIDelegate {
     let vibrateFrequencyMessageHandler = "vibrateFrequencyMessageHandler"
     let vibrateFrequencyForeverMessageHandler = "vibrateFrequencyForeverMessageHandler"
     let stopMessageHandler = "stopMessageHandler"
+    let vibrateWithCustomPatternMessageHandler = "vibrateWithCustomPatternMessageHandler"
+    let vibrateWithCustomPatternForeverMessageHandler = "vibrateWithCustomPatternForeverMessageHandler"
+    let vibrateWithCustomPatternDurationMessageHandler = "vibrateWithCustomPatternDurationMessageHandler"
     private var VibrationMan: VibrationManager?
 
     override func viewDidLoad() {
@@ -34,6 +37,9 @@ class ViewController: UIViewController, WKUIDelegate {
         configuration.userContentController.add( self, name: vibrateForeverMessageHandler )
         configuration.userContentController.add( self, name: vibrateFrequencyMessageHandler )
         configuration.userContentController.add( self, name: vibrateFrequencyForeverMessageHandler )
+        configuration.userContentController.add( self, name: vibrateWithCustomPatternMessageHandler )
+        configuration.userContentController.add( self, name: vibrateWithCustomPatternForeverMessageHandler )
+        configuration.userContentController.add( self, name: vibrateWithCustomPatternDurationMessageHandler )
         configuration.userContentController.add( self, name: stopMessageHandler )
         let webView = WKWebView( frame: .zero, configuration: configuration )
 
@@ -52,7 +58,7 @@ class ViewController: UIViewController, WKUIDelegate {
 
         //Jen's info
 //        if let url = URL(string: "http://10.178.13.127:8080//phet-ios-vibtest-app/vibtest-embedded.html?test") {
-        if let url = URL(string: "http://10.0.0.198:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea&sound=disabled&vibration=objects") {
+        if let url = URL(string: "http://10.0.0.253:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea&vibration=objects&zoom=true") {
             webView.load(URLRequest(url: url))
         }
 
@@ -120,19 +126,52 @@ extension ViewController: WKScriptMessageHandler {
         }
     
     if message.name == vibrateFrequencyForeverMessageHandler {
-            guard let dict = message.body as? [String: AnyObject],
-                let frequency = dict["frequency"] as? Double else {
-                    return
-            }
+        guard let dict = message.body as? [String: AnyObject],
+            let frequency = dict["frequency"] as? Double else {
+                return
+        }
 
-                print("vibrateAtFrequencyForever(frequency): \(frequency)")
-                VibrationMan?.vibrateAtFrequencyForever(frequency: frequency)
-            }
+        print("vibrateAtFrequencyForever(frequency): \(frequency)")
+        VibrationMan?.vibrateAtFrequencyForever(frequency: frequency)
+    }
 
-            if message.name == stopMessageHandler {
-                print("stop(): OK")
-                VibrationMan?.stop()
+    if message.name == stopMessageHandler {
+        print("stop(): OK")
+        VibrationMan?.stop()
+    }
+    
+    if message.name == vibrateWithCustomPatternMessageHandler {
+        guard let dict = message.body as? [String: AnyObject],
+            let vibrationPattern = dict["vibrationPattern"] as? [Double],
+            let duration = dict["duration"] as? Double,
+            let loopForever = dict["loopForever"] as? Bool else {
+                return
             }
+        
+        print("vibrateWithCustomPattern(vibrationPattern, duration, loopForever)")
+        VibrationMan?.vibrateWithCustomPattern(vibrationPattern: vibrationPattern, seconds: duration, loopForever: loopForever);
+    }
+    
+    if message.name == vibrateWithCustomPatternDurationMessageHandler {
+        guard let dict = message.body as? [String: AnyObject],
+            let vibrationPattern = dict["vibrationPattern"] as? [Double],
+            let duration = dict["duration"] as? Double else {
+                return
+            }
+        
+        print("vibrateWithCustomPattern(vibrationPattern, duration)")
+        VibrationMan?.vibrateWithCustomPattern(vibrationPattern: vibrationPattern, seconds: duration );
+    }
+    
+    if message.name == vibrateWithCustomPatternForeverMessageHandler {
+        guard let dict = message.body as? [String: AnyObject],
+            let vibrationPattern = dict["vibrationPattern"] as? [Double] else {
+                return
+            }
+        
+        print("vibrateWithCustomPatternForever(vibrationPattern)")
+        VibrationMan?.vibrateWithCustomPatternForever( vibrationPattern: vibrationPattern );
+    }
     
   }
 }
