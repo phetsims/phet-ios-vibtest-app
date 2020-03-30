@@ -25,6 +25,7 @@ class ViewController: UIViewController, WKUIDelegate {
     let vibrateWithCustomPatternMessageHandler = "vibrateWithCustomPatternMessageHandler"
     let vibrateWithCustomPatternForeverMessageHandler = "vibrateWithCustomPatternForeverMessageHandler"
     let vibrateWithCustomPatternDurationMessageHandler = "vibrateWithCustomPatternDurationMessageHandler"
+    let debugMessageHandler = "debugMessageHandler"
     private var VibrationMan: VibrationManager?
 
     override func viewDidLoad() {
@@ -41,6 +42,7 @@ class ViewController: UIViewController, WKUIDelegate {
         configuration.userContentController.add( self, name: vibrateWithCustomPatternForeverMessageHandler )
         configuration.userContentController.add( self, name: vibrateWithCustomPatternDurationMessageHandler )
         configuration.userContentController.add( self, name: stopMessageHandler )
+        configuration.userContentController.add( self, name: debugMessageHandler );
         let webView = WKWebView( frame: .zero, configuration: configuration )
 
         view.addSubview(webView)
@@ -53,12 +55,17 @@ class ViewController: UIViewController, WKUIDelegate {
         webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
 
+        let cacheBust = UUID().uuidString
+        
+        let urlString = "http://10.0.0.253:8080/balloons-and-static-electricity/balloons-and-static-electricity_en.html?brand=phet&ea&vibration=objects&" + cacheBust;
+        print( urlString );
+
         //Jesse's info
         //if let url = URL(string: "http://127.0.0.1:8080/phet-ios-vibtest-app/vibtest-embedded.html") {
 
         //Jen's info
 //        if let url = URL(string: "http://10.178.13.127:8080//phet-ios-vibtest-app/vibtest-embedded.html?test") {
-        if let url = URL(string: "http://10.0.0.253:8080/john-travoltage/john-travoltage_en.html?brand=phet&ea&vibration=objects&zoom=true") {
+        if let url = URL(string: urlString ) {
             webView.load(URLRequest(url: url))
         }
 
@@ -173,5 +180,15 @@ extension ViewController: WKScriptMessageHandler {
         VibrationMan?.vibrateWithCustomPatternForever( vibrationPattern: vibrationPattern );
     }
     
+    print( "received message" );
+    if message.name == debugMessageHandler {
+        print( "received debug" );
+        guard let dict = message.body as? [String: AnyObject],
+            let debugString = dict["debugString"] as? String else {
+                return
+        }
+
+        print( debugString );
+    }
   }
 }
