@@ -243,6 +243,7 @@ public class VibrationManager {
      }
     
      public func vibrate(seconds: Double){
+        
          vibrate(seconds: seconds, loopForever: false)
      }
      
@@ -254,13 +255,13 @@ public class VibrationManager {
          
          init_engine()
         
-        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness,
-        value: 0.5)
+         let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness,
+         value: 0.5)
         
          let continuousEvent = CHHapticEvent(eventType: .hapticContinuous,
                                              parameters: [on_intensity, sharpness],
                                              relativeTime: 0.0,
-                                             duration: 2)
+                                             duration: 5 )
          
          do {
              // Create a pattern from the continuous haptic event.
@@ -274,7 +275,16 @@ public class VibrationManager {
              
              Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                  if !loopForever {
-                     continuousPlayer.loopEnabled = false
+                    continuousPlayer.loopEnabled = false
+                    
+                    
+                    do {
+                        try continuousPlayer.stop( atTime: 0 );
+                        self.stop();
+                    }
+                    catch {
+                        print( "player stop error" );
+                    }
                  }
              }
              
