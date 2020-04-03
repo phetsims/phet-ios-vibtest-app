@@ -261,7 +261,7 @@ public class VibrationManager {
          let continuousEvent = CHHapticEvent(eventType: .hapticContinuous,
                                              parameters: [on_intensity, sharpness],
                                              relativeTime: 0.0,
-                                             duration: 5 )
+                                             duration: 2 )
          
          do {
              // Create a pattern from the continuous haptic event.
