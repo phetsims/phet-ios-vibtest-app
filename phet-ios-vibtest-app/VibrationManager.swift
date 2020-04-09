@@ -277,7 +277,6 @@ public class VibrationManager {
                  if !loopForever {
                     continuousPlayer.loopEnabled = false
                     
-                    
                     do {
                         try continuousPlayer.stop( atTime: 0 );
                         self.stop();
@@ -396,6 +395,14 @@ public class VibrationManager {
             Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                 if !loopForever {
                    continuousPlayer.loopEnabled = false
+                    
+                    do {
+                        try continuousPlayer.stop( atTime: 0 );
+                        self.stop();
+                    }
+                    catch {
+                        print( "player stop error" );
+                    }
                 }
             }
         }
