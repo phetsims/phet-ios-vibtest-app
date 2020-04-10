@@ -366,9 +366,8 @@ public class VibrationManager {
 
         var relativeTime = 0.0; // in seconds
         var hapticEvents: [CHHapticEvent] = [];
-        for element in vibrationPattern {
-            let index: Int! = vibrationPattern.firstIndex(of: element );
-            
+        
+        for ( index, element ) in vibrationPattern.enumerated() {
             let isEven: Bool = index % 2 == 0;
             var intensity: CHHapticEventParameter;
             if ( isEven ) {
