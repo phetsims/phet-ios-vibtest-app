@@ -364,7 +364,7 @@ public class VibrationManager {
         
         let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
 
-        var relativeTime = 0.0;
+        var relativeTime = 0.0; // in seconds
         var hapticEvents: [CHHapticEvent] = [];
         for element in vibrationPattern {
             let index: Int! = vibrationPattern.firstIndex(of: element );
@@ -377,9 +377,9 @@ public class VibrationManager {
             else {
                 intensity = off_intensity;
             }
-            hapticEvents.append( CHHapticEvent(  eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: relativeTime, duration: element / 1000 ) );
+            hapticEvents.append( CHHapticEvent(  eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: relativeTime, duration: element ) );
             
-            relativeTime += element / 1000;
+            relativeTime += element;
         }
         
         var pattern: CHHapticPattern;
