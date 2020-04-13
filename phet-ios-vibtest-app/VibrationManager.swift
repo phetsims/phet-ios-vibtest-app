@@ -292,27 +292,29 @@ public class VibrationManager {
          }
      }
     
-     public func vibrateAtFrequencyForever(frequency: Double){
-        vibrateAtFrequency(frequency: frequency, seconds: 300, loopForever: true)
+    public func vibrateAtFrequencyForever(frequency: Double, intensity: Double){
+        vibrateAtFrequency(frequency: frequency, seconds: 300, loopForever: true, intensity: intensity)
      }
      
-    public func vibrateAtFrequency(seconds: Double, frequency: Double){
-        vibrateAtFrequency(frequency: frequency, seconds: seconds, loopForever: false)
+    public func vibrateAtFrequency(seconds: Double, frequency: Double, intensity: Double){
+        vibrateAtFrequency(frequency: frequency, seconds: seconds, loopForever: false, intensity: intensity)
      }
     
-    public func vibrateAtFrequency(frequency: Double, seconds: Double, loopForever: Bool){
+    public func vibrateAtFrequency(frequency: Double, seconds: Double, loopForever: Bool, intensity: Double){
          
          init_engine()
         
         let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness,
                                                value: 1.0)
         
+        let intensityParam = CHHapticEventParameter( parameterID: .hapticIntensity, value: Float(intensity))
+        
         var c1: CHHapticEvent
         var c2: CHHapticEvent
         var pattern: CHHapticPattern
         
         c1 = CHHapticEvent(eventType: .hapticTransient,
-        parameters: [on_intensity, sharpness],
+        parameters: [intensityParam, sharpness],
         relativeTime: 0.0,
         duration: 1/frequency)
         
@@ -323,7 +325,7 @@ public class VibrationManager {
         if frequency <= 15 {
             
             c1 = CHHapticEvent(eventType: .hapticContinuous,
-                                             parameters: [on_intensity, sharpness],
+                                             parameters: [intensityParam, sharpness],
                                              relativeTime: 0.0,
                                              duration: 0.5/frequency)
             c2 = CHHapticEvent(eventType: .hapticContinuous,

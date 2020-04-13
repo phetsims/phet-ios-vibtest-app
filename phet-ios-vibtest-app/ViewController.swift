@@ -55,7 +55,7 @@ class ViewController: UIViewController, WKUIDelegate {
         webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
         
-        let urlString = "http://10.0.0.253:8080/balloons-and-static-electricity/balloons-and-static-electricity_en.html?vibration=interaction-changes&brands=phet&ea&hideBalloonSwitch";
+        let urlString = "http://10.0.0.253:8080/balloons-and-static-electricity/balloons-and-static-electricity_en.html?vibration=result&brands=phet&ea&hideBalloonSwitch";
 
         if let url = URL( string: urlString ) {
             webView.load(URLRequest(url: url, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData ) )
@@ -78,7 +78,7 @@ class ViewController: UIViewController, WKUIDelegate {
     func vibratePhone(para: String){
         if (para == "stuff") {
 
-            VibrationMan?.vibrateAtFrequencyForever(frequency: 25)
+            VibrationMan?.vibrateAtFrequencyForever(frequency: 25, intensity: 1.0)
         }
     }
 
@@ -88,7 +88,7 @@ class ViewController: UIViewController, WKUIDelegate {
 
         if ( supportsHaptics ) {
             //engine.start(completionHandler:nil)
-            VibrationMan?.vibrateAtFrequencyForever(frequency: 25)
+            VibrationMan?.vibrateAtFrequencyForever(frequency: 25, intensity: 1.0)
         }
     }
 }
@@ -120,18 +120,19 @@ extension ViewController: WKScriptMessageHandler {
                     return
             }
     
-            print("vibrateAtFrequency(duration, frequency): \(duration), \(frequency)")
-            VibrationMan?.vibrateAtFrequency(seconds: duration, frequency: frequency)
+            print("vibrateAtFrequency(on, frequency): \(duration), \(frequency)")
+        VibrationMan?.vibrateAtFrequency(seconds: duration, frequency: frequency, intensity: 1.0)
         }
     
     if message.name == vibrateFrequencyForeverMessageHandler {
         guard let dict = message.body as? [String: AnyObject],
+            let intensity = dict["intensity"] as? Double,
             let frequency = dict["frequency"] as? Double else {
                 return
         }
 
-        print("vibrateAtFrequencyForever(frequency): \(frequency)")
-        VibrationMan?.vibrateAtFrequencyForever(frequency: frequency)
+        print("vibrateAtFrequencyForever(frequency, intensity): \(frequency)" + ", \(intensity)");
+        VibrationMan?.vibrateAtFrequencyForever(frequency: frequency, intensity: intensity)
     }
 
     if message.name == stopMessageHandler {
