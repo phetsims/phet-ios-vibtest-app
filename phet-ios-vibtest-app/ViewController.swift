@@ -55,7 +55,7 @@ class ViewController: UIViewController, WKUIDelegate {
         webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
         
-        let urlString = "http://10.0.0.253:8080/balloons-and-static-electricity/balloons-and-static-electricity_en.html?vibration=result&brands=phet&ea&hideBalloonSwitch";
+        let urlString = "http://10.0.0.198:8080/balloons-and-static-electricity/balloons-and-static-electricity_en.html?vibration=result&brands=phet&ea&hideBalloonSwitch";
 
         if let url = URL( string: urlString ) {
             webView.load(URLRequest(url: url, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData ) )

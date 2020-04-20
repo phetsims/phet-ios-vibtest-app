@@ -443,14 +443,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BX54XBTB9P;
+				DEVELOPMENT_TEAM = BL59XL5CM2;
 				INFOPLIST_FILE = "phet-ios-vibtest-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-app-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-app-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -462,14 +462,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BX54XBTB9P;
+				DEVELOPMENT_TEAM = BL59XL5CM2;
 				INFOPLIST_FILE = "phet-ios-vibtest-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-app-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "phet.phet-ios-vibtest-app-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
