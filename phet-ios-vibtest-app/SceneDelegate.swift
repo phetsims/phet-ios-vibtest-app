@@ -15,22 +15,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        print("Scene willConnectTo.")
-        
-        // Force convert UIScene type variable to UIWindowScene type variable.
-        let windowScene:UIWindowScene = scene as! UIWindowScene;
-        
-        // Create the UIWindow variable use above UIWindowScene variable.
-        self.window = UIWindow(windowScene: windowScene)
-            
-        // Set this scene's window's background color.
-//        self.window!.backgroundColor = UIColor.red
-        
-        // Create a ViewController object and set it as the scene's window's root view controller.
-        self.window!.rootViewController = ViewController()
-        
-        // Make this scene's window be visible.
-        self.window!.makeKeyAndVisible()
+//        print("Scene willConnectTo.")
+//        
+//        // Force convert UIScene type variable to UIWindowScene type variable.
+//        let windowScene:UIWindowScene = scene as! UIWindowScene;
+//        
+//        // Create the UIWindow variable use above UIWindowScene variable.
+//        self.window = UIWindow(windowScene: windowScene)
+//            
+//        // Set this scene's window's background color.
+////        self.window!.backgroundColor = UIColor.red
+//        
+//        // Create a ViewController object and set it as the scene's window's root view controller.
+//        self.window!.rootViewController = ViewController()
+//        
+//        // Make this scene's window be visible.
+//        self.window!.makeKeyAndVisible()
     
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
