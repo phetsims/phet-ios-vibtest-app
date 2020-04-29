@@ -27,6 +27,26 @@ class ViewController: UIViewController, WKUIDelegate {
     let vibrateWithCustomPatternDurationMessageHandler = "vibrateWithCustomPatternDurationMessageHandler"
     let debugMessageHandler = "debugMessageHandler"
     private var VibrationMan: VibrationManager?
+    
+    // selections for sim and haptic output, set by user selection from previous scene
+    public var simSelection: String!;
+    public var hapticSelection: String!;
+    
+    // maps selected value from teh UIPickerView to the sim name for the url
+    // TODO: This will eventually map directly to a url presumably
+    let simSelectionMap = [
+        "Balloons and Static Electricity": "balloons-and-static-electricity",
+        "John Travoltage": "john-travoltage"
+    ];
+    
+    // maps the selected value from the UIPickerView to the query parameter for the url to select
+    // haptic feedback
+    let hapticSelectionMap = [
+        "Interaction Changes": "interaction-changes",
+        "Objects": "objects",
+        "Manipulation": "manipulation",
+        "Result": "result"
+    ];
 
     override func viewDidLoad() {
 
@@ -55,7 +75,17 @@ class ViewController: UIViewController, WKUIDelegate {
         webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
         
-        let urlString = "http://10.0.0.198:8080/balloons-and-static-electricity/balloons-and-static-electricity_en.html?vibration=result&brands=phet&ea&hideBalloonSwitch";
+        // assemble the URL for the simulation from user selections
+        let localAddress = "10.0.0.198:8080";
+        let simRepoName = self.simSelectionMap[ self.simSelection ] ?? "";
+        var queryParameters = "vibration=\(self.hapticSelectionMap[ self.hapticSelection ]!)&brand=phet&ea";
+        
+        // special additional query parameter for BASE, hide the button that adds another balloon for simplicity
+        if ( simRepoName == "balloons-and-static-electricity" ) {
+            queryParameters = "\(queryParameters)&hideBalloonSwitch";
+        }
+        
+        let urlString = "http://\(localAddress)/\(simRepoName)/\(simRepoName)_en.html?\(queryParameters)";
 
         if let url = URL( string: urlString ) {
             webView.load(URLRequest(url: url, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData ) )

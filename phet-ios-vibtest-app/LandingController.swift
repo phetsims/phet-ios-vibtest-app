@@ -34,7 +34,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.hapticPicker.dataSource = self;
         self.hapticPicker.tag = 1; // so I can get this UI component in class functions
         
-        simData = [ "Balloons and Static Electricity", "John Travolage" ];
+        simData = [ "Balloons and Static Electricity", "John Travoltage" ];
         hapticData = [ "Interaction Changes", "Manipulation", "Objects", "Result" ];
         
     }
@@ -66,6 +66,13 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         }
         else {
             return "ERROR";
+        }
+    }
+    
+    override func prepare( for segue: UIStoryboardSegue, sender: Any? ) {
+        if let nextViewController = segue.destination as? ViewController {
+            nextViewController.simSelection = simData[ picker.selectedRow( inComponent: 0 ) ];
+            nextViewController.hapticSelection = hapticData[ hapticPicker.selectedRow( inComponent: 0 ) ]
         }
     }
 }
