@@ -25,6 +25,7 @@ class ViewController: UIViewController, WKUIDelegate {
     let vibrateWithCustomPatternMessageHandler = "vibrateWithCustomPatternMessageHandler"
     let vibrateWithCustomPatternForeverMessageHandler = "vibrateWithCustomPatternForeverMessageHandler"
     let vibrateWithCustomPatternDurationMessageHandler = "vibrateWithCustomPatternDurationMessageHandler"
+    let vibrationIntensityMessageHandler = "vibrationIntensityMessageHandler"
     let debugMessageHandler = "debugMessageHandler"
     private var VibrationMan: VibrationManager?
     
@@ -63,6 +64,7 @@ class ViewController: UIViewController, WKUIDelegate {
         configuration.userContentController.add( self, name: vibrateWithCustomPatternDurationMessageHandler )
         configuration.userContentController.add( self, name: stopMessageHandler )
         configuration.userContentController.add( self, name: debugMessageHandler );
+        configuration.userContentController.add( self, name: vibrationIntensityMessageHandler );
         let webView = WKWebView( frame: .zero, configuration: configuration )
 
         view.addSubview(webView)
@@ -201,6 +203,16 @@ extension ViewController: WKScriptMessageHandler {
         
         print("vibrateWithCustomPatternForever(vibrationPattern)")
         VibrationMan?.vibrateWithCustomPatternForever( vibrationPattern: vibrationPattern );
+    }
+    
+    if message.name == vibrationIntensityMessageHandler {
+        guard let dict = message.body as? [String: AnyObject],
+            let intensity = dict["intensity"] as? Double else {
+                return
+        }
+        
+        VibrationMan?.setVibrationIntensity(intensity: intensity);
+        
     }
     
     if message.name == debugMessageHandler {

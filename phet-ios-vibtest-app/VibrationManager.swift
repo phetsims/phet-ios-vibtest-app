@@ -24,6 +24,11 @@ public class VibrationManager {
     
     var engine: CHHapticEngine!
     
+    // the player while a vibration is active, if dynamic parameters are changed they are sent to this
+    var activePlayer: CHHapticAdvancedPatternPlayer!
+    
+    var activeIntensity = 1.0;
+    
     private func init_engine(){
         do {
             engine = try CHHapticEngine()
@@ -268,18 +273,19 @@ public class VibrationManager {
              let pattern = try CHHapticPattern(events: [continuousEvent], parameters: [])
              
              // Create a player from the continuous haptic pattern.
-             let continuousPlayer = try engine.makeAdvancedPlayer(with: pattern)
+            self.activePlayer = try engine.makeAdvancedPlayer(with: pattern)
              
-             continuousPlayer.loopEnabled = true
-             try continuousPlayer.start(atTime: 0)
+            self.activePlayer.loopEnabled = true
+            try self.activePlayer.start(atTime: 0)
              
              Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                  if !loopForever {
-                    continuousPlayer.loopEnabled = false
+                    self.activePlayer.loopEnabled = false
                     
                     do {
-                        try continuousPlayer.stop( atTime: 0 );
+                        try self.activePlayer.stop( atTime: 0 );
                         self.stop();
+                        self.activePlayer = nil;
                     }
                     catch {
                         print( "player stop error" );
@@ -302,12 +308,12 @@ public class VibrationManager {
     
     public func vibrateAtFrequency(frequency: Double, seconds: Double, loopForever: Bool, intensity: Double){
          
-         init_engine()
+        init_engine()
         
         let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness,
                                                value: 1.0)
-        
-        let intensityParam = CHHapticEventParameter( parameterID: .hapticIntensity, value: Float(intensity))
+        self.activeIntensity = self.clampIntensity(intensity: 1);
+        let intensityParam = CHHapticEventParameter( parameterID: .hapticIntensity, value: Float(self.activeIntensity))
         
         var c1: CHHapticEvent
         var c2: CHHapticEvent
@@ -344,20 +350,28 @@ public class VibrationManager {
          do {
              
              // Create a player from the continuous haptic pattern.
-             let continuousPlayer = try engine.makeAdvancedPlayer(with: pattern)
+            self.activePlayer = try engine.makeAdvancedPlayer(with: pattern)
              
-             continuousPlayer.loopEnabled = true
-             try continuousPlayer.start(atTime: 0)
+            self.activePlayer.loopEnabled = true
+            try self.activePlayer.start(atTime: 0)
              
              Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                  if !loopForever {
-                     continuousPlayer.loopEnabled = false
+                    self.activePlayer.loopEnabled = false
                  }
              }
              
          } catch let error {
              print("Pattern Player Creation Error: \(error)")
          }
+    }
+    
+    /**
+     * Make sure that the intensity is between (0, 1] - it must be greater than zero because dynamic intensity parameters multiply when setting new
+     * value, and so we cannot divide by zero when calculating new resultant intensity. Intensity of 0.001 is not detectable.
+     */
+    private func clampIntensity( intensity: Double ) -> Double {
+        return min( max( intensity, 0.0001 ), 1 );
     }
     
     public func vibrateWithCustomPattern( vibrationPattern: [Double], seconds: Double, loopForever: Bool ){
@@ -388,18 +402,19 @@ public class VibrationManager {
            pattern = try CHHapticPattern(events: hapticEvents, parameters: [])
             
             // Create a player from the continuous haptic pattern.
-            let continuousPlayer = try engine.makeAdvancedPlayer(with: pattern)
+            self.activePlayer = try engine.makeAdvancedPlayer(with: pattern)
             
-            continuousPlayer.loopEnabled = true
-            try continuousPlayer.start(atTime: 0)
+            self.activePlayer.loopEnabled = true
+            try self.activePlayer.start(atTime: 0)
             
             Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                 if !loopForever {
-                   continuousPlayer.loopEnabled = false
+                    self.activePlayer.loopEnabled = false
                     
                     do {
-                        try continuousPlayer.stop( atTime: 0 );
+                        try self.activePlayer.stop( atTime: 0 );
                         self.stop();
+                        self.activePlayer = nil;
                     }
                     catch {
                         print( "player stop error" );
@@ -418,6 +433,31 @@ public class VibrationManager {
     
     func vibrateWithCustomPatternForever( vibrationPattern: [Double] ) {
         vibrateWithCustomPattern( vibrationPattern: vibrationPattern, seconds: 300, loopForever: true );
+    }
+    
+    // Sets the intensity of vibration for the active player
+    public func setVibrationIntensity( intensity: Double ) {
+        let proposedIntensity = self.clampIntensity(intensity: intensity);
+        
+        // the resultant intensity for the pattern is the MULTIPLE of the original value (when first created) and
+        // new value - we want to set the absolute intensity from 0 to 1 for our API, so this
+        // is the intensity required to have the resultant intensity equal to the value provided
+        let intensityValue = proposedIntensity / self.activeIntensity;
+        
+        print( "value: \(self.activeIntensity * intensityValue)" )
+        
+        
+        let intensityParameter = CHHapticDynamicParameter( parameterID: .hapticIntensityControl, value: Float(intensityValue), relativeTime: 0)
+        
+        if ( self.activePlayer != nil ) {
+            do {
+                print( "intensity: \(self.activeIntensity)" );
+                try self.activePlayer.sendParameters( [ intensityParameter ], atTime: 0 );
+            }
+            catch let error {
+                print( "Error setting dynamic intensity: \(error)")
+            }
+        }
     }
     
     public func stop() {
