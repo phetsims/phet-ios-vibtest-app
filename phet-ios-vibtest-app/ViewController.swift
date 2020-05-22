@@ -50,8 +50,8 @@ class ViewController: UIViewController, WKUIDelegate {
     
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
-        "Balloons and Static Electricity": "1.5.0-dev.16",
-        "John Travoltage": "1.6.0-dev.18"
+        "Balloons and Static Electricity": "1.5.0-dev.17",
+        "John Travoltage": "1.6.0-dev.19"
     ];
 
     override func viewDidLoad() {
