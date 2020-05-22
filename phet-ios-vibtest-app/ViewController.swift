@@ -113,16 +113,6 @@ class ViewController: UIViewController, WKUIDelegate {
             VibrationMan?.vibrateAtFrequencyForever(frequency: 25, intensity: 1.0)
         }
     }
-
-
-    @IBAction func btn(_ sender: Any) {
-        print("HEYO");
-
-        if ( supportsHaptics ) {
-            //engine.start(completionHandler:nil)
-            VibrationMan?.vibrateAtFrequencyForever(frequency: 25, intensity: 1.0)
-        }
-    }
 }
 
 // Communicate with javascript through Webkit
