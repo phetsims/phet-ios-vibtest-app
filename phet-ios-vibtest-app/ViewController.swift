@@ -34,7 +34,6 @@ class ViewController: UIViewController, WKUIDelegate {
     public var hapticSelection: String!;
     
     // maps selected value from teh UIPickerView to the sim name for the url
-    // TODO: This will eventually map directly to a url presumably
     let simSelectionMap = [
         "Balloons and Static Electricity": "balloons-and-static-electricity",
         "John Travoltage": "john-travoltage"
@@ -47,6 +46,12 @@ class ViewController: UIViewController, WKUIDelegate {
         "Objects": "objects",
         "Manipulation": "manipulation",
         "Results": "result"
+    ];
+    
+    // maps the selected sim to the deployed version to test
+    let deployedSimVersionMap = [
+        "Balloons and Static Electricity": "1.5.0-dev.16",
+        "John Travoltage": "1.6.0-dev.18"
     ];
 
     override func viewDidLoad() {
@@ -77,17 +82,14 @@ class ViewController: UIViewController, WKUIDelegate {
         webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
         
-        // assemble the URL for the simulation from user selections
-        let localAddress = "10.0.0.198:8080";
-        let simRepoName = self.simSelectionMap[ self.simSelection ] ?? "";
-        var queryParameters = "vibration=\(self.hapticSelectionMap[ self.hapticSelection ]!)&brand=phet&ea";
+        // a URL for the sim from user choices pulling from local server, used
+        // for development - see function to change localhost address
+        //let urlString = self.getLocalSimURL();
         
-        // special additional query parameter for BASE, hide the button that adds another balloon for simplicity
-        if ( simRepoName == "balloons-and-static-electricity" ) {
-            queryParameters = "\(queryParameters)&hideBalloonSwitch";
-        }
-        
-        let urlString = "http://\(localAddress)/\(simRepoName)/\(simRepoName)_en.html?\(queryParameters)";
+        // a URL for the sim from user selection that will go to a deployed
+        // version, for testing
+        let urlString = self.getDeployedSimURL();
+        print( urlString );
 
         if let url = URL( string: urlString ) {
             webView.load(URLRequest(url: url, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData ) )
@@ -103,6 +105,40 @@ class ViewController: UIViewController, WKUIDelegate {
         if supportsHaptics {
             VibrationMan = VibrationManager()
         }
+    }
+    
+    // Get a url to a local sim for testing
+    func getLocalSimURL() -> String {
+        // assemble the URL for the simulation from user selections
+        let localAddress = "10.0.0.198:8080";
+        let simRepoName = self.simSelectionMap[ self.simSelection ] ?? "";
+        let queryParameters = self.getQueryParameters();
+        
+        return "http://\(localAddress)/\(simRepoName)/\(simRepoName)_en.html?\(queryParameters)";
+    }
+    
+    // Get a URL to a depoyed sim
+    // @param - version of the build (something like 1.6.0-dev.18)
+    func getDeployedSimURL() -> String {
+        
+        // assemble the URL for the simulation from user selections
+        let spotAddress = "phet-dev.colorado.edu/html";
+        let simRepoName = self.simSelectionMap[ self.simSelection ] ?? "";
+        let simVersion = self.deployedSimVersionMap[ self.simSelection ] ?? "";
+        let queryParameters = self.getQueryParameters();
+        
+        return "https://\(spotAddress)/\(simRepoName)/\(simVersion)/phet/\(simRepoName)_en_phet.html?\(queryParameters)";
+    }
+    
+    func getQueryParameters() -> String {
+        var queryParameters = "vibration=\(self.hapticSelectionMap[ self.hapticSelection ]!)&brand=phet&ea";
+        
+        // special additional query parameter for BASE, hide the button that adds another balloon for simplicity
+        if ( self.simSelection == "Balloons and Static Electricity" ) {
+            queryParameters = "\(queryParameters)&hideBalloonSwitch";
+        }
+        
+        return queryParameters;
     }
 
     // Vibrate iPhone8+
