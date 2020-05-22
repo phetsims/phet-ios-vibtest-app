@@ -24,7 +24,6 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     override func viewDidLoad() {
         
-        print( "Heyo@" );
         super.viewDidLoad();
         
         // textView cannot be changed by user
