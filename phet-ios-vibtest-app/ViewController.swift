@@ -46,7 +46,7 @@ class ViewController: UIViewController, WKUIDelegate {
         "Interaction Changes": "interaction-changes",
         "Objects": "objects",
         "Manipulation": "manipulation",
-        "Result": "result"
+        "Results": "result"
     ];
 
     override func viewDidLoad() {

@@ -16,14 +16,22 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var hapticPicker: UIPickerView!
+    @IBOutlet weak var textView: UITextView!
     
     var simData: [String] = [String]()
     var hapticData: [String] = [String]()
+    var hapticDescriptionMap: [String: String] = [:];
     
     override func viewDidLoad() {
         
         print( "Heyo@" );
         super.viewDidLoad();
+        
+        // textView cannot be changed by user
+        self.textView.isEditable = false;
+        
+        // inrease the size a bit
+        self.textView.font = UIFont(name: self.textView.font!.fontName, size: 25);
         
         // connect data for picker delegate
         self.picker.delegate = self;
@@ -34,9 +42,14 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.hapticPicker.dataSource = self;
         self.hapticPicker.tag = 1; // so I can get this UI component in class functions
         
-        simData = [ "Balloons and Static Electricity", "John Travoltage" ];
-        hapticData = [ "Interaction Changes", "Manipulation", "Objects", "Result" ];
-        
+        simData = [ "John Travoltage", "Balloons and Static Electricity" ];
+        hapticData = [ "Objects", "Manipulation", "Interaction Changes", "Results" ];
+        hapticDescriptionMap = [
+            "Objects": "Each important object in the scene is assigned a distinct vibration.",
+            "Manipulation": "Each interactive object is assigned a distinct vibration.",
+            "Interaction Changes": "User interaction with movable objects creates vibrations.",
+            "Results":"Contextual changes resulting from user interactions produce vibrations."
+        ];
     }
     
     // Number of columns of data, true for both pickers
@@ -62,6 +75,8 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             return simData[ row ];
         }
         else if ( pickerView.tag == 1 ) {
+            textView.text = hapticDescriptionMap[ hapticData[ row ] ];
+            
             return hapticData[ row ];
         }
         else {
