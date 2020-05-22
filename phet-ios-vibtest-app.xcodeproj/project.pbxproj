@@ -16,6 +16,7 @@
 		5E9E02B0239AFEEF00E79BA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9E02AE239AFEEF00E79BA0 /* LaunchScreen.storyboard */; };
 		5E9E02BB239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02BA239AFEEF00E79BA0 /* phet_ios_vibtest_appTests.swift */; };
 		5E9E02C6239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9E02C5239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift */; };
+		5EADC9FB2478499A00B534C3 /* ios-vibtest-app-privacy-policy.html in Resources */ = {isa = PBXBuildFile; fileRef = 5EADC9FA2478499A00B534C3 /* ios-vibtest-app-privacy-policy.html */; };
 		9117726C23F472EC006B5831 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117726B23F472EC006B5831 /* VibrationManager.swift */; };
 		9117726D23F472EC006B5831 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117726B23F472EC006B5831 /* VibrationManager.swift */; };
 		9117726E23F472EC006B5831 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117726B23F472EC006B5831 /* VibrationManager.swift */; };
@@ -54,6 +55,7 @@
 		5E9E02C1239AFEEF00E79BA0 /* phet-ios-vibtest-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "phet-ios-vibtest-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E9E02C5239AFEEF00E79BA0 /* phet_ios_vibtest_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = phet_ios_vibtest_appUITests.swift; sourceTree = "<group>"; };
 		5E9E02C7239AFEEF00E79BA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EADC9FA2478499A00B534C3 /* ios-vibtest-app-privacy-policy.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ios-vibtest-app-privacy-policy.html"; sourceTree = "<group>"; };
 		9117726B23F472EC006B5831 /* VibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 				5E9E02AC239AFEEF00E79BA0 /* Assets.xcassets */,
 				5E9E02AE239AFEEF00E79BA0 /* LaunchScreen.storyboard */,
 				5E9E02B1239AFEEF00E79BA0 /* Info.plist */,
+				5EADC9FA2478499A00B534C3 /* ios-vibtest-app-privacy-policy.html */,
 			);
 			path = "phet-ios-vibtest-app";
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E9E02B0239AFEEF00E79BA0 /* LaunchScreen.storyboard in Resources */,
+				5EADC9FB2478499A00B534C3 /* ios-vibtest-app-privacy-policy.html in Resources */,
 				5E9E02AD239AFEEF00E79BA0 /* Assets.xcassets in Resources */,
 				5E9E02AB239AFEEB00E79BA0 /* Main.storyboard in Resources */,
 			);
