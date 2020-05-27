@@ -33,13 +33,13 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "a11y-icons_ios-description.png",
+      "filename" : "a11y-icons_ios-description_120x120.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "a11y-icons_ios-description-1.png",
+      "filename" : "a11y-icons_ios-description_120x120-1.png",
       "scale" : "2x"
     },
     {
