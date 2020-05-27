@@ -31,6 +31,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jiz-sT-44r">
+                                <rect key="frame" x="167" y="62" width="80" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ch-Kb-yo2">
                                 <rect key="frame" x="95.666666666666686" y="642" width="223" height="79"/>
                                 <constraints>
@@ -45,42 +51,42 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m40-wl-oKt">
-                                <rect key="frame" x="47" y="71" width="320" height="115"/>
+                                <rect key="frame" x="47" y="117" width="320" height="115"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="115" id="QnI-8J-2HK"/>
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-X9-1jq">
-                                <rect key="frame" x="47" y="201" width="320" height="216"/>
+                                <rect key="frame" x="47" y="247" width="320" height="216"/>
                             </pickerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Initial Text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pyX-Hu-4mu">
-                                <rect key="frame" x="7" y="432" width="400" height="200"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0A5-n4-wNM">
+                                <rect key="frame" x="262" y="59" width="34" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="m40-wl-oKt" firstAttribute="leading" secondItem="0ef-X9-1jq" secondAttribute="leading" id="2Rc-d1-BIg"/>
-                            <constraint firstItem="m40-wl-oKt" firstAttribute="top" secondItem="hJA-nw-NVQ" secondAttribute="top" constant="27" id="3Tz-lD-QY9"/>
-                            <constraint firstItem="4Ch-Kb-yo2" firstAttribute="top" secondItem="pyX-Hu-4mu" secondAttribute="bottom" constant="10" id="6SS-iR-HVK"/>
+                            <constraint firstItem="Jiz-sT-44r" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="4cV-Jc-J3B"/>
                             <constraint firstAttribute="bottomMargin" secondItem="4Ch-Kb-yo2" secondAttribute="bottom" constant="15" id="82F-or-8ip"/>
-                            <constraint firstItem="pyX-Hu-4mu" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="I5o-CL-4sX"/>
-                            <constraint firstItem="pyX-Hu-4mu" firstAttribute="top" secondItem="0ef-X9-1jq" secondAttribute="bottom" constant="15" id="LIW-xh-wFC"/>
-                            <constraint firstItem="pyX-Hu-4mu" firstAttribute="leading" secondItem="hJA-nw-NVQ" secondAttribute="leading" constant="7" id="lzC-qj-KUG"/>
+                            <constraint firstItem="0A5-n4-wNM" firstAttribute="leading" secondItem="Jiz-sT-44r" secondAttribute="trailing" constant="15" id="Ahr-Gs-hCq"/>
+                            <constraint firstItem="0ef-X9-1jq" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="J0N-Py-NtH"/>
+                            <constraint firstItem="m40-wl-oKt" firstAttribute="top" secondItem="0A5-n4-wNM" secondAttribute="bottom" constant="20" id="JkH-Qq-32b"/>
+                            <constraint firstItem="Jiz-sT-44r" firstAttribute="top" secondItem="RQ7-dx-ZhQ" secondAttribute="topMargin" constant="18" id="SDN-FT-IfK"/>
+                            <constraint firstItem="m40-wl-oKt" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="gxb-By-yK8"/>
+                            <constraint firstItem="0A5-n4-wNM" firstAttribute="top" secondItem="RQ7-dx-ZhQ" secondAttribute="topMargin" constant="15" id="hi9-AH-gs5"/>
                             <constraint firstItem="0ef-X9-1jq" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="uAr-tm-1CS"/>
                             <constraint firstItem="4Ch-Kb-yo2" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="uLH-6c-Gth"/>
-                            <constraint firstItem="0ef-X9-1jq" firstAttribute="top" secondItem="m40-wl-oKt" secondAttribute="bottom" constant="15" id="z1v-S4-HTb"/>
+                            <constraint firstItem="0ef-X9-1jq" firstAttribute="top" secondItem="m40-wl-oKt" secondAttribute="bottom" constant="15" id="zcV-FK-Z4x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hJA-nw-NVQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="vhi-i8-I6d"/>
                     <connections>
                         <outlet property="hapticPicker" destination="0ef-X9-1jq" id="Wdl-QN-a72"/>
+                        <outlet property="idTextField" destination="0A5-n4-wNM" id="2Kf-Rw-Jid"/>
+                        <outlet property="launchButton" destination="4Ch-Kb-yo2" id="sDr-7x-GFr"/>
                         <outlet property="picker" destination="m40-wl-oKt" id="82i-cj-0Ha"/>
-                        <outlet property="textView" destination="pyX-Hu-4mu" id="4Bx-yd-LOP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-ej-61z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

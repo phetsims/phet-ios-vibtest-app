@@ -11,30 +11,45 @@ import CoreHaptics
 import WebKit
 import AudioToolbox.AudioServices
 
-class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
+    @IBOutlet weak var launchButton: UIButton!
     
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var hapticPicker: UIPickerView!
-    @IBOutlet weak var textView: UITextView!
+    //@IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var idTextField: UITextField!
     
     var simData: [String] = [String]()
     var hapticData: [String] = [String]()
-    var hapticDescriptionMap: [String: String] = [:];
+    
+    // description of the selected haptic feedback, in case it is useful - commented out
+    // for now, we don't want to lead participants
+    //var hapticDescriptionMap: [String: String] = [:];
     
     override func viewDidLoad() {
         
         super.viewDidLoad();
         
-        // textView cannot be changed by user
-        self.textView.isEditable = false;
+        // adds a "Done" button to the user ID textView keyboard, which is not dismissable by default (ugh)
+        self.addDoneButtonToKeyboard();
         
-        // inrease the size a bit
-        self.textView.font = UIFont(name: self.textView.font!.fontName, size: 25);
+        // launch button is disabled until id is entered
+        self.launchButton.isEnabled = false;
+        
+//        // textView cannot be changed by user
+//        self.textView.isEditable = false;
+//
+//        // inrease the size a bit
+//        self.textView.font = UIFont(name: self.textView.font!.fontName, size: 25);
         
         // connect data for picker delegate
         self.picker.delegate = self;
         self.picker.dataSource = self;
+        
+        // to override certain functions to limit number of characters
+        self.idTextField.delegate = self;
+        
         self.picker.tag = 0; // so I can get this UI component in class functions
         
         self.hapticPicker.delegate = self;
@@ -43,12 +58,12 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         simData = [ "John Travoltage", "Balloons and Static Electricity" ];
         hapticData = [ "Objects", "Manipulation", "Interaction Changes", "Results" ];
-        hapticDescriptionMap = [
-            "Objects": "Each important object in the scene is assigned a distinct vibration.",
-            "Manipulation": "Each interactive object is assigned a distinct vibration.",
-            "Interaction Changes": "User interaction with movable objects creates vibrations.",
-            "Results":"Contextual changes resulting from user interactions produce vibrations."
-        ];
+//        hapticDescriptionMap = [
+//            "Objects": "Each important object in the scene is assigned a distinct vibration.",
+//            "Manipulation": "Each interactive object is assigned a distinct vibration.",
+//            "Interaction Changes": "User interaction with movable objects creates vibrations.",
+//            "Results":"Contextual changes resulting from user interactions produce vibrations."
+//        ];
     }
     
     // Number of columns of data, true for both pickers
@@ -74,7 +89,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             return simData[ row ];
         }
         else if ( pickerView.tag == 1 ) {
-            textView.text = hapticDescriptionMap[ hapticData[ row ] ];
+            //textView.text = hapticDescriptionMap[ hapticData[ row ] ];
             
             return hapticData[ row ];
         }
@@ -88,5 +103,34 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             nextViewController.simSelection = simData[ picker.selectedRow( inComponent: 0 ) ];
             nextViewController.hapticSelection = hapticData[ hapticPicker.selectedRow( inComponent: 0 ) ]
         }
+    }
+    
+    func addDoneButtonToKeyboard() {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init( x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50 ) );
+        doneToolbar.barStyle = .default;
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+
+        let items = [flexSpace, done];
+        doneToolbar.items = items;
+        doneToolbar.sizeToFit();
+
+        self.idTextField.inputAccessoryView = doneToolbar;
+    }
+    
+    @objc func doneButtonAction() {
+        self.idTextField.resignFirstResponder();
+    }
+    
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+       replacementString string: String) -> Bool {
+        let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        let numberOfChars = newText.count
+    
+        // can't launch the simulation unless we have a user ID
+        self.launchButton.isEnabled = numberOfChars > 0;
+    
+        return numberOfChars <= 5 // 5 Limit Value
     }
 }
