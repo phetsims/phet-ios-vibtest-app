@@ -22,6 +22,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     var simData: [String] = [String]()
     var hapticData: [String] = [String]()
+    var p_id: Int = 0
     
     // description of the selected haptic feedback, in case it is useful - commented out
     // for now, we don't want to lead participants
@@ -126,11 +127,17 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
        replacementString string: String) -> Bool {
         let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        p_id = Int(newText)!
+    
         let numberOfChars = newText.count
     
         // can't launch the simulation unless we have a user ID
         self.launchButton.isEnabled = numberOfChars > 0;
     
         return numberOfChars <= 5 // 5 Limit Value
+    }
+    
+    func getID() -> Int{
+       return p_id
     }
 }

@@ -20,6 +20,7 @@
 		9117726C23F472EC006B5831 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117726B23F472EC006B5831 /* VibrationManager.swift */; };
 		9117726D23F472EC006B5831 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117726B23F472EC006B5831 /* VibrationManager.swift */; };
 		9117726E23F472EC006B5831 /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117726B23F472EC006B5831 /* VibrationManager.swift */; };
+		91AEA1912481554500403506 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AEA1902481554500403506 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		5E9E02C7239AFEEF00E79BA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EADC9FA2478499A00B534C3 /* ios-vibtest-app-privacy-policy.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ios-vibtest-app-privacy-policy.html"; sourceTree = "<group>"; };
 		9117726B23F472EC006B5831 /* VibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
+		91AEA1902481554500403506 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		5E9E02A2239AFEEB00E79BA0 /* phet-ios-vibtest-app */ = {
 			isa = PBXGroup;
 			children = (
+				91AEA1902481554500403506 /* DataController.swift */,
 				5E9E02A3239AFEEB00E79BA0 /* AppDelegate.swift */,
 				5E9E02A5239AFEEB00E79BA0 /* SceneDelegate.swift */,
 				5E9E02A7239AFEEB00E79BA0 /* ViewController.swift */,
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E9E02A8239AFEEB00E79BA0 /* ViewController.swift in Sources */,
+				91AEA1912481554500403506 /* DataController.swift in Sources */,
 				5E9E02A4239AFEEB00E79BA0 /* AppDelegate.swift in Sources */,
 				9117726C23F472EC006B5831 /* VibrationManager.swift in Sources */,
 				5E3BEEBF244E7B9A00620304 /* LandingController.swift in Sources */,
