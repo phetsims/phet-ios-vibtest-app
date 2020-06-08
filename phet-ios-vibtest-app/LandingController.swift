@@ -65,6 +65,15 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
 //            "Interaction Changes": "User interaction with movable objects creates vibrations.",
 //            "Results":"Contextual changes resulting from user interactions produce vibrations."
 //        ];
+        
+        // set accessibility attributes for VoiceOver
+        self.idTextField.accessibilityLabel = "User ID";
+        self.idTextField.accessibilityHint = "This will be given to you by the interviewer."
+        self.picker.isAccessibilityElement = true;
+        self.hapticPicker.isAccessibilityElement = true;
+        self.picker.accessibilityHint = "Simulation";
+        self.hapticPicker.accessibilityHint = "Haptic Output";
+        self.launchButton.accessibilityHint = "Set user ID to enable."
     }
     
     // Number of columns of data, true for both pickers
@@ -90,8 +99,6 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             return simData[ row ];
         }
         else if ( pickerView.tag == 1 ) {
-            //textView.text = hapticDescriptionMap[ hapticData[ row ] ];
-            
             return hapticData[ row ];
         }
         else {
@@ -127,18 +134,22 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
        replacementString string: String) -> Bool {
-        let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+    
+    let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string);
+    
+    let numberOfChars = newText.count
+    if ( numberOfChars > 0 ) {
         p_id = Int(newText)!
-    
-        let numberOfChars = newText.count
-    
-        // can't launch the simulation unless we have a user ID
-        self.launchButton.isEnabled = numberOfChars > 0;
-    
-        return numberOfChars <= 5 // 5 Limit Value
     }
     
-    func getID() -> Int{
+    // can't launch the simulation unless we have a user ID
+    self.launchButton.isEnabled = numberOfChars > 0;
+    self.launchButton.accessibilityHint = numberOfChars > 0 ? nil: "Set the user ID to enable.";
+
+    return numberOfChars <= 5 // 5 Limit Value
+  }
+    
+  func getID() -> Int{
        return p_id
-    }
+  }
 }
