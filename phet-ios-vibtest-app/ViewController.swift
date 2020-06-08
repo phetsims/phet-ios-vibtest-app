@@ -37,6 +37,10 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     //private let emailAddress = "Jen.Tennison@SLU.edu";
     private let emailAddress = "jesse.greenberg@colorado.edu";
     
+    // whether or not data was successfully sent, in which case
+    // we can go back without warning
+    private var dataSent = false;
+    
     // selections for sim and haptic output, set by user selection from previous scene
     public var simSelection: String!;
     public var hapticSelection: String!;
@@ -116,6 +120,29 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         if supportsHaptics {
             VibrationMan = VibrationManager()
         }
+        
+        // we use a custom navigation item to create a waning dialog before going back
+        self.navigationItem.hidesBackButton = true;
+        let newBackButton = UIBarButtonItem( title: "\u{2190} Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ViewController.back(sender:)) );
+        self.navigationItem.leftBarButtonItem = newBackButton;
+    }
+    
+    @objc func back( sender: UIBarButtonItem ) {
+        
+        
+        if ( self.dataSent ) {
+            _ = navigationController?.popViewController(animated: true);
+        }
+        else {
+            let alert = UIAlertController(title: "Are you sure you want to go back?", message: "Please save and send data before going back.", preferredStyle: .alert );
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {
+                action in self.navigationController?.popViewController(animated: true);
+            }));
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil));
+            
+            self.present( alert, animated: true);
+        }
     }
     
     // Get a url to a local sim for testing
@@ -190,6 +217,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult,
                                error: Swift.Error?) {
+
+        if ( result == .sent ) {
+            self.dataSent = true;
+        }
+
         controller.dismiss(animated: true, completion: nil)
     }
     
