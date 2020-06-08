@@ -10,13 +10,16 @@ import UIKit
 import CoreHaptics
 import WebKit
 import AudioToolbox.AudioServices
+import MessageUI
 
-class ViewController: UIViewController, WKUIDelegate {
+class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControllerDelegate {
 
     var engine: CHHapticEngine!
     var player: CHHapticPatternPlayer!
     var supportsHaptics: Bool = false
     var webView: WKWebView!
+    
+    // messages added to the web view, received from the simulation
     let vibrateMessageHandler = "vibrateMessageHandler"
     let vibrateForeverMessageHandler = "vibrateForeverMessageHandler"
     let vibrateFrequencyMessageHandler = "vibrateFrequencyMessageHandler"
@@ -27,11 +30,18 @@ class ViewController: UIViewController, WKUIDelegate {
     let vibrateWithCustomPatternDurationMessageHandler = "vibrateWithCustomPatternDurationMessageHandler"
     let vibrationIntensityMessageHandler = "vibrationIntensityMessageHandler"
     let debugMessageHandler = "debugMessageHandler"
+    let saveDataMessageHandler = "saveDataMessageHandler";
     private var VibrationMan: VibrationManager?
+    
+    // data from interviews is sent to this address
+    //private let emailAddress = "Jen.Tennison@SLU.edu";
+    private let emailAddress = "jesse.greenberg@colorado.edu";
     
     // selections for sim and haptic output, set by user selection from previous scene
     public var simSelection: String!;
     public var hapticSelection: String!;
+    public var participantId: String!;
+    
     
     // maps selected value from teh UIPickerView to the sim name for the url
     let simSelectionMap = [
@@ -69,6 +79,7 @@ class ViewController: UIViewController, WKUIDelegate {
         configuration.userContentController.add( self, name: vibrateWithCustomPatternDurationMessageHandler )
         configuration.userContentController.add( self, name: stopMessageHandler )
         configuration.userContentController.add( self, name: debugMessageHandler );
+        configuration.userContentController.add( self, name: saveDataMessageHandler );
         configuration.userContentController.add( self, name: vibrationIntensityMessageHandler );
         let webView = WKWebView( frame: .zero, configuration: configuration )
 
@@ -84,11 +95,11 @@ class ViewController: UIViewController, WKUIDelegate {
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        //let urlString = self.getLocalSimURL();
+        let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        let urlString = self.getDeployedSimURL();
+        //let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -128,6 +139,58 @@ class ViewController: UIViewController, WKUIDelegate {
         let queryParameters = self.getQueryParameters();
         
         return "https://\(spotAddress)/\(simRepoName)/\(simVersion)/phet/\(simRepoName)_en_phet.html?\(queryParameters)";
+    }
+    
+    func saveCSV( dataString: String ) {
+        let filename = "p\(String( self.participantId))_\(String( self.hapticSelection))_\(String(self.simSelection))";
+        
+        var csvString = "";
+        
+        // header for data
+        csvString = csvString.appending( "X,Y,Time (seconds),Event\n");
+        
+        // the data string componenens are separated by ';'
+        let events = dataString.components( separatedBy: ";");
+        
+        for event in events {
+            
+            // event data is already comma separated, just add
+            // a new line
+            csvString = csvString.appending( "\(event)\n" );
+        }
+        
+        // converting it to NSData
+        let saveData = csvString.data(using: String.Encoding.utf8, allowLossyConversion: false);
+        
+        let emailViewController = configuredMailComposeViewController(saveData: saveData! as NSData, filename: filename);
+            if MFMailComposeViewController.canSendMail() {
+                self.present(emailViewController, animated: true, completion: nil);
+            }
+        
+    }
+    
+    // creates the email view controller, and sets up the email
+    // with address and content
+    func configuredMailComposeViewController(saveData: NSData, filename: String) -> MFMailComposeViewController {
+        let emailController = MFMailComposeViewController();
+        emailController.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate;
+        emailController.setSubject(filename + "CSV File");
+        emailController.setToRecipients([self.emailAddress]);
+        emailController.setMessageBody("Data from PhET Interviews", isHTML: false);
+
+        // Attaching the .CSV file to the email.
+        emailController.addAttachmentData(saveData as Data, mimeType: "text/csv", fileName: filename + ".csv");
+
+        return emailController;
+    }
+    
+    // tells the delegate that the user wants to dismiss the composition
+    // view
+    // overrides
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult,
+                               error: Swift.Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     func getQueryParameters() -> String {
@@ -248,6 +311,16 @@ extension ViewController: WKScriptMessageHandler {
             }
 
         print( "debug string: ", debugString );
+    }
+    
+    if message.name == saveDataMessageHandler {
+        guard let dict = message.body as? [String: AnyObject],
+            let dataString = dict["dataString"] as? String else {
+                return
+            }
+        
+        // do something with the data string
+        self.saveCSV(dataString: dataString);
     }
   }
 }

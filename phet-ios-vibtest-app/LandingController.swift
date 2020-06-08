@@ -103,6 +103,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         if let nextViewController = segue.destination as? ViewController {
             nextViewController.simSelection = simData[ picker.selectedRow( inComponent: 0 ) ];
             nextViewController.hapticSelection = hapticData[ hapticPicker.selectedRow( inComponent: 0 ) ]
+            nextViewController.participantId = self.idTextField.text;
         }
     }
     
