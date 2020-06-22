@@ -34,8 +34,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     private var VibrationMan: VibrationManager?
     
     // data from interviews is sent to this address
-    //private let emailAddress = "Jen.Tennison@SLU.edu";
-    private let emailAddress = "jesse.greenberg@colorado.edu";
+    private let emailAddress = "Jen.Tennison@SLU.edu";
+    //private let emailAddress = ".edu";
     
     // whether or not data was successfully sent, in which case
     // we can go back without warning
@@ -148,7 +148,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     // Get a url to a local sim for testing
     func getLocalSimURL() -> String {
         // assemble the URL for the simulation from user selections
-        let localAddress = "10.0.0.198:8080";
+        let localAddress = "192.168.1.4:8080";
         let simRepoName = self.simSelectionMap[ self.simSelection ] ?? "";
         let queryParameters = self.getQueryParameters();
         
