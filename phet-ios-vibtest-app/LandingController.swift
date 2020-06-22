@@ -36,7 +36,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.addDoneButtonToKeyboard();
         
         // launch button is disabled until id is entered
-        //self.launchButton.isEnabled = false;
+        self.launchButton.isEnabled = false;
         
 //        // textView cannot be changed by user
 //        self.textView.isEditable = false;
