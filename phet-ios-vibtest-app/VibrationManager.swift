@@ -75,6 +75,8 @@ public class VibrationManager {
             Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                 if !loopForever {
                     continuousPlayer.loopEnabled = false
+                    
+                    timer.invalidate();
                 }
             }
             
@@ -117,6 +119,8 @@ public class VibrationManager {
              Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                  if !loopForever {
                      continuousPlayer.loopEnabled = false
+                    
+                     timer.invalidate();
                  }
              }
              
@@ -163,6 +167,7 @@ public class VibrationManager {
              Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                  if !loopForever {
                      continuousPlayer.loopEnabled = false
+                    timer.invalidate();
                  }
              }
              
@@ -280,16 +285,20 @@ public class VibrationManager {
              
              Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                  if !loopForever {
-                    self.activePlayer.loopEnabled = false
+                    if ( self.activePlayer != nil ) {
+                        self.activePlayer.loopEnabled = false
+                        do {
+                            try self.activePlayer.stop( atTime: 0 );
+                            self.stop();
+                            self.activePlayer = nil;
+                        }
+                        catch {
+                            print( "player stop error" );
+                        }
+                    }
                     
-                    do {
-                        try self.activePlayer.stop( atTime: 0 );
-                        self.stop();
-                        self.activePlayer = nil;
-                    }
-                    catch {
-                        print( "player stop error" );
-                    }
+                    // stop running this timer
+                    timer.invalidate();
                  }
              }
              
@@ -358,6 +367,9 @@ public class VibrationManager {
              Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                  if !loopForever {
                     self.activePlayer.loopEnabled = false
+                    
+                    // stop this timer from running any more iterations
+                    timer.invalidate();
                  }
              }
              
@@ -409,16 +421,21 @@ public class VibrationManager {
             
             Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { timer in
                 if !loopForever {
-                    self.activePlayer.loopEnabled = false
+                    if ( self.activePlayer != nil ) {
+                        self.activePlayer.loopEnabled = false
+                        
+                        do {
+                            try self.activePlayer.stop( atTime: 0 );
+                            self.stop();
+                            self.activePlayer = nil;
+                        }
+                        catch {
+                            print( "player stop error" );
+                        }
+                    }
                     
-                    do {
-                        try self.activePlayer.stop( atTime: 0 );
-                        self.stop();
-                        self.activePlayer = nil;
-                    }
-                    catch {
-                        print( "player stop error" );
-                    }
+                    // stop this timer from further iterations
+                    timer.invalidate();
                 }
             }
         }
