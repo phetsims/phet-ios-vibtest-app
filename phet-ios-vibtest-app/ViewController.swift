@@ -66,7 +66,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
         "Balloons and Static Electricity": "1.5.0-dev.18",
-        "John Travoltage": "1.6.0-dev.20"
+        "John Travoltage": "1.6.0-dev.23"
     ];
 
     override func viewDidLoad() {
@@ -100,11 +100,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        let urlString = self.getLocalSimURL();
+        //let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        //let urlString = self.getDeployedSimURL();
+        let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -130,7 +130,9 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     
     @objc func back( sender: UIBarButtonItem ) {
         
-        
+        // stop all vibration if we attempt to leave the sim
+        VibrationMan?.stop();
+    
         if ( self.dataSent ) {
             _ = navigationController?.popViewController(animated: true);
         }
