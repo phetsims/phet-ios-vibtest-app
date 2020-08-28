@@ -59,7 +59,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         "Interaction Changes": "interaction-changes",
         "Objects": "objects",
         "Manipulation": "manipulation",
-        "Results": "result"
+        "Results": "result",
+        "Prototype Design 1": "prototypeDesign1"
     ];
     
     // maps the selected sim to the deployed version to test
@@ -99,11 +100,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        //let urlString = self.getLocalSimURL();
+        let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        let urlString = self.getDeployedSimURL();
+        //let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -148,7 +149,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     // Get a url to a local sim for testing
     func getLocalSimURL() -> String {
         // assemble the URL for the simulation from user selections
-        let localAddress = "192.168.1.4:8080";
+        let localAddress = "10.0.0.179:8080";
         let simRepoName = self.simSelectionMap[ self.simSelection ] ?? "";
         let queryParameters = self.getQueryParameters();
         
@@ -226,7 +227,18 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     }
     
     func getQueryParameters() -> String {
-        var queryParameters = "vibration=\(self.hapticSelectionMap[ self.hapticSelection ]!)&brand=phet&ea";
+        let hapticSelectionString = self.hapticSelectionMap[self.hapticSelection ]!;
+        
+        var vibrationParameter = "vibration";
+        
+        // the "prototype" designs are a special case that is not
+        // included in the paradigms, and they go through a different
+        // query parameter
+        if ( hapticSelectionString == "prototypeDesign1" ) {
+            vibrationParameter = "simVibration";
+        }
+        
+        var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea";
         
         // special additional query parameter for BASE, hide the button that adds another balloon for simplicity
         if ( self.simSelection == "Balloons and Static Electricity" ) {

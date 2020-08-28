@@ -58,7 +58,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.hapticPicker.tag = 1; // so I can get this UI component in class functions
         
         simData = [ "John Travoltage", "Balloons and Static Electricity" ];
-        hapticData = [ "Objects", "Manipulation", "Interaction Changes", "Results" ];
+        hapticData = [ "Objects", "Manipulation", "Interaction Changes", "Results", "Prototype Design 1" ];
 //        hapticDescriptionMap = [
 //            "Objects": "Each important object in the scene is assigned a distinct vibration.",
 //            "Manipulation": "Each interactive object is assigned a distinct vibration.",

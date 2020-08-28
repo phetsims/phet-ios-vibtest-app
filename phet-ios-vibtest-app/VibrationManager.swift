@@ -262,16 +262,19 @@ public class VibrationManager {
      }
     
      public func vibrate(seconds: Double, loopForever: Bool){
-         
-         init_engine()
+        init_engine();
+        
+        // if atTime is 0 (or value less than player's time)
+        // vibration stops immediately
+        self.stopAndClearPlayer();
         
          let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness,
-         value: 0.5)
+                                                value: 1.0)
         
          let continuousEvent = CHHapticEvent(eventType: .hapticContinuous,
                                              parameters: [on_intensity, sharpness],
                                              relativeTime: 0.0,
-                                             duration: 2 )
+                                             duration: seconds )
          
          do {
              // Create a pattern from the continuous haptic event.
@@ -482,5 +485,22 @@ public class VibrationManager {
             engine.stop()
         }
         
+    }
+    
+    // Try to stop the activePlayer vibration immediately. I don't
+    // fully understand why this the above would work while this
+    // is what is needed - no op if the activePlayer isn't defined
+    public func stopAndClearPlayer() {
+        if ( self.activePlayer != nil ) {
+            do {
+                // stopping at time = 0 will stop the play immediately
+                try self.activePlayer.stop( atTime: 0 );
+                //self.stop();
+                self.activePlayer = nil;
+            }
+            catch {
+                print( "player stop error" );
+            }
+        }
     }
 }
