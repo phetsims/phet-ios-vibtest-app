@@ -11,6 +11,11 @@ import CoreHaptics
 
 public class VibrationManager {
     
+    // CONSTANTS
+    // a vibration can either be continuous or transient in the simulation request
+    static let CONTINUOUS = "CONTINUOUS";
+    static let TRANSIENT = "TRANSIENT";
+    
     // Create an intensity parameter:
     let on_intensity = CHHapticEventParameter(parameterID: .hapticIntensity,
                                            value: 1.0)
@@ -310,6 +315,169 @@ public class VibrationManager {
          }
      }
     
+    // A single function that can trigger vibrations with provided parameters.
+    // If duration is nil, we will vibrate forever.
+    // If the vibrationPattern is an empty array, we will continuously vibrate with no off time
+    // If the frequency is nil, we will will vibrate with full motor strength, no down time
+    public func vibrateContinuous( duration: Double? = nil,
+                               intensity: Double = 1.0,
+                               sharpness: Double = 1.0,
+                               frequency: Double? = nil,
+                               vibrationPattern: [Double] = []
+                              ) {
+        init_engine();
+        
+        // if duration is nil, we will loop this pattern forever
+        let loopForever = duration == nil;
+        
+        // parameters for the CHHapticEvent
+        let sharpnessParameter = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(sharpness) );
+        
+        let onIntensityParameter = CHHapticEventParameter(parameterID: .hapticIntensity,
+                                                          value: Float(intensity) );
+        
+        if ( vibrationPattern.count > 0 ) {
+            
+            // there is some pattern specified so we will sequence the motor on/off
+            let offIntensityParameter = CHHapticEventParameter(parameterID: .hapticIntensity,
+                                                               value: 0.0 );
+            
+            // in seconds, time from the beginning of vibration for each CHHapticEvent in the
+            // pattern sequence
+            var relativeTime = 0.0;
+            var hapticEvents: [CHHapticEvent] = [];
+            
+            for ( index, element ) in vibrationPattern.enumerated() {
+                let isEven: Bool = index % 2 == 0;
+                var intensityParameter: CHHapticEventParameter;
+                if ( isEven ) {
+                    intensityParameter = onIntensityParameter
+                }
+                else {
+                    intensityParameter = offIntensityParameter;
+                }
+                hapticEvents.append( CHHapticEvent(
+                                        eventType: .hapticContinuous,
+                                        parameters: [intensityParameter, sharpnessParameter],
+                                        relativeTime: relativeTime,
+                                        duration: element
+                ) );
+                
+                relativeTime += element;
+            }
+            
+            var pattern: CHHapticPattern;
+            do {
+               pattern = try CHHapticPattern(events: hapticEvents, parameters: [])
+                
+                // Create a player from the continuous haptic pattern.
+                self.activePlayer = try engine.makeAdvancedPlayer(with: pattern)
+                
+                self.activePlayer.loopEnabled = true
+                try self.activePlayer.start(atTime: 0)
+                
+                // relativeTime is now the sum of vibrationPattern, and is the default interval
+                // if we are looping forever
+                let timerInterval = duration ?? relativeTime;
+                
+                Timer.scheduledTimer(withTimeInterval: timerInterval, repeats: true) { timer in
+                    if !loopForever {
+                        if ( self.activePlayer != nil ) {
+                            self.activePlayer.loopEnabled = false
+                            
+                            do {
+                                try self.activePlayer.stop( atTime: 0 );
+                                self.stop();
+                                self.activePlayer = nil;
+                            }
+                            catch {
+                                print( "player stop error" );
+                            }
+                        }
+                        
+                        // stop this timer from further iterations
+                        timer.invalidate();
+                    }
+                }
+            }
+            catch {
+                print("Pattern Creation Error: \(error)")
+            }
+        }
+        else {
+            
+            // no custom pattern, just vibrate continuously with the provided parameters
+            do {
+                
+                let vibrationDuration = duration ?? 3;
+                
+                let vibrationEvent = CHHapticEvent(
+                        eventType: .hapticContinuous,
+                        parameters: [onIntensityParameter, sharpnessParameter],
+                        relativeTime: 0.0,
+                        duration: vibrationDuration
+                )
+                
+                // Create a pattern from the continuous haptic event.
+                let pattern = try CHHapticPattern(events: [vibrationEvent], parameters: []);
+                
+                // Create a player from the continuous haptic pattern.
+                self.activePlayer = try engine.makeAdvancedPlayer(with: pattern)
+                
+                self.activePlayer.loopEnabled = true
+                try self.activePlayer.start(atTime: 0)
+                
+                Timer.scheduledTimer(withTimeInterval: vibrationDuration, repeats: true) { timer in
+                    if !loopForever {
+                       if ( self.activePlayer != nil ) {
+                           self.activePlayer.loopEnabled = false
+                           do {
+                               try self.activePlayer.stop( atTime: 0 );
+                               self.stop();
+                               self.activePlayer = nil;
+                           }
+                           catch {
+                               print( "player stop error" );
+                           }
+                       }
+                       
+                       // stop running this timer
+                       timer.invalidate();
+                    }
+                }
+                
+            } catch let error {
+                print("Pattern Player Creation Error: \(error)")
+            }
+        }
+    }
+    
+    public func vibrateTransient( intensity: Double = 1.0, sharpness: Double = 1.0 ) {
+        init_engine();
+        
+        do {
+            // parameters for the CHHapticEvent
+            let sharpnessParameter = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(sharpness) );
+            
+            let onIntensityParameter = CHHapticEventParameter(parameterID: .hapticIntensity,
+                                                              value: Float(intensity) );
+        
+            let vibrationEvent = CHHapticEvent(
+                    eventType: .hapticTransient,
+                    parameters: [onIntensityParameter, sharpnessParameter],
+                    relativeTime: 0.0
+            )
+            
+            let pattern = try CHHapticPattern(events: [vibrationEvent], parameters: []);
+            self.activePlayer = try engine.makeAdvancedPlayer(with: pattern)
+            try self.activePlayer.start(atTime: 0)
+        }
+        catch {
+            print("Transient haptic error: \(error)")
+        }
+
+    }
+    
     public func vibrateAtFrequencyForever(frequency: Double, intensity: Double){
         vibrateAtFrequency(frequency: frequency, seconds: 300, loopForever: true, intensity: intensity)
      }
@@ -335,8 +503,6 @@ public class VibrationManager {
         parameters: [intensityParam, sharpness],
         relativeTime: 0.0,
         duration: 1/frequency)
-        
-        
     
         pattern = try! CHHapticPattern(events: [c1], parameters: [])
             

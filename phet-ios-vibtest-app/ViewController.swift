@@ -29,6 +29,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     let vibrateWithCustomPatternForeverMessageHandler = "vibrateWithCustomPatternForeverMessageHandler"
     let vibrateWithCustomPatternDurationMessageHandler = "vibrateWithCustomPatternDurationMessageHandler"
     let vibrationIntensityMessageHandler = "vibrationIntensityMessageHandler"
+    let vibrateContinuousMessageHandler = "vibrateContinuousMessageHandler"
+    let vibrateTransientMessageHandler = "vibrateTransientMessageHandler"
     let debugMessageHandler = "debugMessageHandler"
     let saveDataMessageHandler = "saveDataMessageHandler";
     private var VibrationMan: VibrationManager?
@@ -86,6 +88,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         configuration.userContentController.add( self, name: debugMessageHandler );
         configuration.userContentController.add( self, name: saveDataMessageHandler );
         configuration.userContentController.add( self, name: vibrationIntensityMessageHandler );
+        configuration.userContentController.add( self, name: vibrateContinuousMessageHandler );
+        configuration.userContentController.add( self, name: vibrateTransientMessageHandler );
         let webView = WKWebView( frame: .zero, configuration: configuration )
 
         view.addSubview(webView)
@@ -100,11 +104,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        //let urlString = self.getLocalSimURL();
+        let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        let urlString = self.getDeployedSimURL();
+        //let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -240,7 +244,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
             vibrationParameter = "simVibration";
         }
         
-        var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea";
+        var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea&supportsSelfVoicing";
         
         // special additional query parameter for BASE, hide the button that adds another balloon for simplicity
         if ( self.simSelection == "Balloons and Static Electricity" ) {
@@ -348,6 +352,42 @@ extension ViewController: WKScriptMessageHandler {
         
         VibrationMan?.setVibrationIntensity(intensity: intensity);
         
+    }
+
+    if ( message.name == vibrateContinuousMessageHandler ) {
+        guard let dict = message.body as? [String: AnyObject] else {
+            return
+        }
+        
+        // all arguments are optional for vibrateContinuous - the as? will evaluate to nil
+        // if any of these types cannot be cast
+        let frequency = dict["frequency"] as? Double;
+        let pattern = dict["pattern"] as? [Double] ?? [];
+        let duration = dict["duration"] as? Double;
+        let sharpness = dict["sharpness"] as? Double ?? 1.0;
+        let intensity = dict["intensity"] as? Double ?? 1.0;
+        
+        VibrationMan?.vibrateContinuous(
+            duration: duration,
+            intensity: intensity,
+            sharpness: sharpness,
+            frequency: frequency,
+            vibrationPattern: pattern
+        );
+    }
+    
+    if message.name == vibrateTransientMessageHandler {
+        guard let dict = message.body as? [String: AnyObject] else {
+            return
+        }
+        
+        let sharpness = dict["sharpness"] as? Double ?? 1.0;
+        let intensity = dict["intensity"] as? Double ?? 1.0;
+        
+        VibrationMan?.vibrateTransient(
+            intensity: intensity,
+            sharpness: sharpness
+        );
     }
     
     if message.name == debugMessageHandler {
