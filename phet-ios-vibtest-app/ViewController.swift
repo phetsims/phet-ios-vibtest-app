@@ -51,7 +51,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     
     // maps selected value from teh UIPickerView to the sim name for the url
     let simSelectionMap = [
-        "Balloons and Static Electricity": "balloons-and-static-electricity",
+        "Gravity Force Lab: Basics": "gravity-force-lab-basics",
         "John Travoltage": "john-travoltage"
     ];
     
@@ -67,7 +67,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
-        "Balloons and Static Electricity": "1.5.0-dev.18",
+        "Gravity Force Lab: Basics": "1.1.0-dev.15",
         "John Travoltage": "1.6.0-dev.29"
     ];
 
@@ -245,11 +245,6 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         }
         
         var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea&supportsSelfVoicing";
-        
-        // special additional query parameter for BASE, hide the button that adds another balloon for simplicity
-        if ( self.simSelection == "Balloons and Static Electricity" ) {
-            queryParameters = "\(queryParameters)&hideBalloonSwitch";
-        }
         
         return queryParameters;
     }
