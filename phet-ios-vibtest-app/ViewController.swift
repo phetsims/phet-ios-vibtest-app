@@ -47,7 +47,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     public var simSelection: String!;
     public var hapticSelection: String!;
     public var participantId: String!;
-    
+    public var enableSelfVoicing: Bool!;
     
     // maps selected value from teh UIPickerView to the sim name for the url
     let simSelectionMap = [
@@ -231,7 +231,13 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     func getQueryParameters() -> String {
         let hapticSelectionString = self.hapticSelectionMap[self.hapticSelection ]!;
         let vibrationParameter = "vibrationParadigm";
-        var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea&supportsSelfVoicing";
+        var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea";
+        
+        
+        // this will enable self-voicing as well as gesture control by default
+        if ( self.enableSelfVoicing ) {
+            queryParameters = "\(queryParameters)&supportsSelfVoicing"
+        }
         
         return queryParameters;
     }

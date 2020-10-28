@@ -20,6 +20,8 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     //@IBOutlet weak var textView: UITextView!
     @IBOutlet weak var idTextField: UITextField!
     
+    @IBOutlet weak var selfVoicingSwitch: UISwitch!
+    
     var simData: [String] = [String]()
     var hapticData: [String] = [String]()
     var p_id: Int = 0
@@ -68,6 +70,8 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.picker.accessibilityHint = "Simulation";
         self.hapticPicker.accessibilityHint = "Haptic Output";
         self.launchButton.accessibilityHint = "Set user ID to enable."
+        self.selfVoicingSwitch.accessibilityLabel = "Enable Self Voicing";
+        self.selfVoicingSwitch.accessibilityHint = "Enables simulation speech without VoiceOver";
     }
     
     // Number of columns of data, true for both pickers
@@ -105,6 +109,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             nextViewController.simSelection = simData[ picker.selectedRow( inComponent: 0 ) ];
             nextViewController.hapticSelection = hapticData[ hapticPicker.selectedRow( inComponent: 0 ) ]
             nextViewController.participantId = self.idTextField.text;
+            nextViewController.enableSelfVoicing = selfVoicingSwitch.isOn;
         }
     }
     

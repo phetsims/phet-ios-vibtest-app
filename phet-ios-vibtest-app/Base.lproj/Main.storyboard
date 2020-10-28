@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bDK-n7-hcr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bDK-n7-hcr">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,8 +16,8 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="JOy-Km-G5V"/>
                 </viewController>
@@ -37,7 +39,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ch-Kb-yo2">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ch-Kb-yo2">
                                 <rect key="frame" x="95.666666666666686" y="642" width="223" height="79"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="79" id="eXq-UJ-mAZ"/>
@@ -61,7 +63,7 @@
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-X9-1jq">
-                                <rect key="frame" x="47" y="249" width="320" height="216"/>
+                                <rect key="frame" x="47" y="244" width="320" height="216"/>
                                 <accessibility key="accessibilityConfiguration" label="Vibration">
                                     <accessibilityTraits key="traits" adjustable="YES"/>
                                     <bool key="isElement" value="YES"/>
@@ -72,22 +74,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bks-pj-NNL">
+                                <rect key="frame" x="329.66666666666669" y="479.66666666666669" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Self-Voicing:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYv-am-x8l">
+                                <rect key="frame" x="99.333333333333329" y="480" width="215.33333333333337" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hJA-nw-NVQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Jiz-sT-44r" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="4cV-Jc-J3B"/>
                             <constraint firstAttribute="bottomMargin" secondItem="4Ch-Kb-yo2" secondAttribute="bottom" constant="15" id="82F-or-8ip"/>
                             <constraint firstItem="0A5-n4-wNM" firstAttribute="leading" secondItem="Jiz-sT-44r" secondAttribute="trailing" constant="15" id="Ahr-Gs-hCq"/>
+                            <constraint firstItem="bks-pj-NNL" firstAttribute="leading" secondItem="nYv-am-x8l" secondAttribute="trailing" constant="15" id="En2-rh-L4c"/>
                             <constraint firstItem="0ef-X9-1jq" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="J0N-Py-NtH"/>
                             <constraint firstItem="m40-wl-oKt" firstAttribute="top" secondItem="0A5-n4-wNM" secondAttribute="bottom" constant="20" id="JkH-Qq-32b"/>
                             <constraint firstItem="Jiz-sT-44r" firstAttribute="top" secondItem="RQ7-dx-ZhQ" secondAttribute="topMargin" constant="18" id="SDN-FT-IfK"/>
                             <constraint firstItem="m40-wl-oKt" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="gxb-By-yK8"/>
                             <constraint firstItem="0A5-n4-wNM" firstAttribute="top" secondItem="RQ7-dx-ZhQ" secondAttribute="topMargin" constant="15" id="hi9-AH-gs5"/>
+                            <constraint firstItem="bks-pj-NNL" firstAttribute="centerY" secondItem="nYv-am-x8l" secondAttribute="centerY" id="hsH-Kk-b71"/>
+                            <constraint firstItem="nYv-am-x8l" firstAttribute="centerX" secondItem="0ef-X9-1jq" secondAttribute="centerX" id="jRN-oD-cJs"/>
+                            <constraint firstItem="nYv-am-x8l" firstAttribute="top" secondItem="0ef-X9-1jq" secondAttribute="bottom" constant="20" id="llh-30-GEK"/>
                             <constraint firstItem="0ef-X9-1jq" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="uAr-tm-1CS"/>
                             <constraint firstItem="4Ch-Kb-yo2" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="uLH-6c-Gth"/>
-                            <constraint firstItem="0ef-X9-1jq" firstAttribute="top" secondItem="m40-wl-oKt" secondAttribute="bottom" constant="15" id="zcV-FK-Z4x"/>
+                            <constraint firstItem="0ef-X9-1jq" firstAttribute="top" secondItem="m40-wl-oKt" secondAttribute="bottom" constant="10" id="zcV-FK-Z4x"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="hJA-nw-NVQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="vhi-i8-I6d"/>
                     <connections>
@@ -95,6 +110,7 @@
                         <outlet property="idTextField" destination="0A5-n4-wNM" id="2Kf-Rw-Jid"/>
                         <outlet property="launchButton" destination="4Ch-Kb-yo2" id="sDr-7x-GFr"/>
                         <outlet property="picker" destination="m40-wl-oKt" id="82i-cj-0Ha"/>
+                        <outlet property="selfVoicingSwitch" destination="bks-pj-NNL" id="ZFf-PV-6Ok"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-ej-61z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -120,4 +136,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="850.27173913043487"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
