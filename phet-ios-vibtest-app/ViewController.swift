@@ -58,17 +58,13 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     // maps the selected value from the UIPickerView to the query parameter for the url to select
     // haptic feedback
     let hapticSelectionMap = [
-        "Interaction Changes": "interaction-changes",
-        "Objects": "objects",
-        "Manipulation": "manipulation",
-        "Results": "result",
-        "Prototype Design 1": "prototypeDesign1"
+        "Prototype Design 1": "1"
     ];
     
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
         "Gravity Force Lab: Basics": "1.1.0-dev.15",
-        "John Travoltage": "1.6.0-dev.29"
+        "John Travoltage": "1.6.0-dev.30"
     ];
 
     override func viewDidLoad() {
@@ -104,11 +100,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        let urlString = self.getLocalSimURL();
+        // let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        //let urlString = self.getDeployedSimURL();
+        let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -234,16 +230,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     
     func getQueryParameters() -> String {
         let hapticSelectionString = self.hapticSelectionMap[self.hapticSelection ]!;
-        
-        var vibrationParameter = "vibration";
-        
-        // the "prototype" designs are a special case that is not
-        // included in the paradigms, and they go through a different
-        // query parameter
-        if ( hapticSelectionString == "prototypeDesign1" ) {
-            vibrationParameter = "simVibration";
-        }
-        
+        let vibrationParameter = "vibrationParadigm";
         var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea&supportsSelfVoicing";
         
         return queryParameters;
