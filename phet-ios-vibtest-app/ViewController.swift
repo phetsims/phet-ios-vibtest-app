@@ -242,8 +242,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     
     func getQueryParameters() -> String {
         let hapticSelectionString = self.hapticSelectionMap[self.hapticSelection ]!;
+        
+        // query parameters that enable vibration, selected vibration paradigm, and
+        // enhanced sound by default
         let vibrationParameter = "vibrationParadigm";
-        var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea";
+        var queryParameters = "\(vibrationParameter)=\( hapticSelectionString)&brand=phet&ea&supportsEnhancedSound&enhancedSoundInitiallyEnabled=true";
         
         
         // this will enable self-voicing as well as gesture control by default
