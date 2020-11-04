@@ -62,7 +62,7 @@
                                     <constraint firstAttribute="height" constant="115" id="QnI-8J-2HK"/>
                                 </constraints>
                             </pickerView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-X9-1jq">
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-X9-1jq">
                                 <rect key="frame" x="47" y="244" width="320" height="216"/>
                                 <accessibility key="accessibilityConfiguration" label="Vibration">
                                     <accessibilityTraits key="traits" adjustable="YES"/>
@@ -75,14 +75,23 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bks-pj-NNL">
-                                <rect key="frame" x="329.66666666666669" y="479.66666666666669" width="51" height="31"/>
+                                <rect key="frame" x="350" y="459.66666666666669" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Self-Voicing:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYv-am-x8l">
-                                <rect key="frame" x="99.333333333333329" y="480" width="215.33333333333337" height="30"/>
+                                <rect key="frame" x="15" y="460" width="215.33333333333334" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Custom Gesture:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qow-Yb-lbi">
+                                <rect key="frame" x="15" y="505" width="260" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tqd-WY-hAC">
+                                <rect key="frame" x="350" y="504.66666666666674" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hJA-nw-NVQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -90,15 +99,19 @@
                             <constraint firstItem="Jiz-sT-44r" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="4cV-Jc-J3B"/>
                             <constraint firstAttribute="bottomMargin" secondItem="4Ch-Kb-yo2" secondAttribute="bottom" constant="15" id="82F-or-8ip"/>
                             <constraint firstItem="0A5-n4-wNM" firstAttribute="leading" secondItem="Jiz-sT-44r" secondAttribute="trailing" constant="15" id="Ahr-Gs-hCq"/>
-                            <constraint firstItem="bks-pj-NNL" firstAttribute="leading" secondItem="nYv-am-x8l" secondAttribute="trailing" constant="15" id="En2-rh-L4c"/>
                             <constraint firstItem="0ef-X9-1jq" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="J0N-Py-NtH"/>
                             <constraint firstItem="m40-wl-oKt" firstAttribute="top" secondItem="0A5-n4-wNM" secondAttribute="bottom" constant="20" id="JkH-Qq-32b"/>
                             <constraint firstItem="Jiz-sT-44r" firstAttribute="top" secondItem="RQ7-dx-ZhQ" secondAttribute="topMargin" constant="18" id="SDN-FT-IfK"/>
+                            <constraint firstItem="Qow-Yb-lbi" firstAttribute="leading" secondItem="nYv-am-x8l" secondAttribute="leading" id="Wjh-eI-5PT"/>
+                            <constraint firstItem="nYv-am-x8l" firstAttribute="leading" secondItem="hJA-nw-NVQ" secondAttribute="leading" constant="15" id="YH0-Oc-Lzx"/>
+                            <constraint firstItem="hJA-nw-NVQ" firstAttribute="trailing" secondItem="bks-pj-NNL" secondAttribute="trailing" constant="15" id="ZNn-Vb-Mxg"/>
+                            <constraint firstItem="Tqd-WY-hAC" firstAttribute="centerX" secondItem="bks-pj-NNL" secondAttribute="centerX" id="cxj-GS-zew"/>
                             <constraint firstItem="m40-wl-oKt" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="gxb-By-yK8"/>
                             <constraint firstItem="0A5-n4-wNM" firstAttribute="top" secondItem="RQ7-dx-ZhQ" secondAttribute="topMargin" constant="15" id="hi9-AH-gs5"/>
                             <constraint firstItem="bks-pj-NNL" firstAttribute="centerY" secondItem="nYv-am-x8l" secondAttribute="centerY" id="hsH-Kk-b71"/>
-                            <constraint firstItem="nYv-am-x8l" firstAttribute="centerX" secondItem="0ef-X9-1jq" secondAttribute="centerX" id="jRN-oD-cJs"/>
-                            <constraint firstItem="nYv-am-x8l" firstAttribute="top" secondItem="0ef-X9-1jq" secondAttribute="bottom" constant="20" id="llh-30-GEK"/>
+                            <constraint firstItem="nYv-am-x8l" firstAttribute="top" secondItem="0ef-X9-1jq" secondAttribute="bottom" id="llh-30-GEK"/>
+                            <constraint firstItem="Qow-Yb-lbi" firstAttribute="top" secondItem="nYv-am-x8l" secondAttribute="bottom" constant="15" id="mf9-TU-eCx"/>
+                            <constraint firstItem="Tqd-WY-hAC" firstAttribute="centerY" secondItem="Qow-Yb-lbi" secondAttribute="centerY" id="rUZ-dL-BHv"/>
                             <constraint firstItem="0ef-X9-1jq" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="uAr-tm-1CS"/>
                             <constraint firstItem="4Ch-Kb-yo2" firstAttribute="centerX" secondItem="RQ7-dx-ZhQ" secondAttribute="centerX" id="uLH-6c-Gth"/>
                             <constraint firstItem="0ef-X9-1jq" firstAttribute="top" secondItem="m40-wl-oKt" secondAttribute="bottom" constant="10" id="zcV-FK-Z4x"/>
@@ -106,6 +119,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="vhi-i8-I6d"/>
                     <connections>
+                        <outlet property="customGestureSwitch" destination="Tqd-WY-hAC" id="lWx-AY-BG0"/>
                         <outlet property="hapticPicker" destination="0ef-X9-1jq" id="Wdl-QN-a72"/>
                         <outlet property="idTextField" destination="0A5-n4-wNM" id="2Kf-Rw-Jid"/>
                         <outlet property="launchButton" destination="4Ch-Kb-yo2" id="sDr-7x-GFr"/>

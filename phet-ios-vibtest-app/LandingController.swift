@@ -21,6 +21,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     @IBOutlet weak var idTextField: UITextField!
     
     @IBOutlet weak var selfVoicingSwitch: UISwitch!
+    @IBOutlet weak var customGestureSwitch: UISwitch!
     
     var simData: [String] = [String]()
     var hapticData: [String] = [String]()
@@ -72,6 +73,18 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.launchButton.accessibilityHint = "Set user ID to enable."
         self.selfVoicingSwitch.accessibilityLabel = "Enable Self Voicing";
         self.selfVoicingSwitch.accessibilityHint = "Enables simulation speech without VoiceOver";
+        self.customGestureSwitch.accessibilityLabel = "Enable Custom Gesture";
+        self.customGestureSwitch.accessibilityHint = "Enables gesture control of the simulation without VoiceOver";
+        
+        selfVoicingSwitch.addTarget(self, action: #selector(changeGestureSwitchEnabled), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func changeGestureSwitchEnabled(selfVoicingSwitch: UISwitch) {
+        customGestureSwitch.isEnabled = selfVoicingSwitch.isOn;
+        
+        if ( !selfVoicingSwitch.isOn ) {
+            customGestureSwitch.isOn = selfVoicingSwitch.isOn;
+        }
     }
     
     // Number of columns of data, true for both pickers
@@ -110,6 +123,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             nextViewController.hapticSelection = hapticData[ hapticPicker.selectedRow( inComponent: 0 ) ]
             nextViewController.participantId = self.idTextField.text;
             nextViewController.enableSelfVoicing = selfVoicingSwitch.isOn;
+            nextViewController.enableCustomGesture = customGestureSwitch.isOn;
         }
     }
     

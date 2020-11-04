@@ -44,6 +44,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     public var hapticSelection: String!;
     public var participantId: String!;
     public var enableSelfVoicing: Bool!;
+    public var enableCustomGesture: Bool!;
     
     // maps selected value from teh UIPickerView to the sim name for the url
     let simSelectionMap = [
@@ -59,8 +60,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
-        "Gravity Force Lab: Basics": "1.1.0-dev.16",
-        "John Travoltage": "1.6.0-dev.35"
+        "Gravity Force Lab: Basics": "1.1.0-dev.20",
+        "John Travoltage": "1.6.0-dev.36"
     ];
 
     override func viewDidLoad() {
@@ -96,11 +97,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        //let urlString = self.getLocalSimURL();
+        let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        let urlString = self.getDeployedSimURL();
+        //let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -252,6 +253,9 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         // this will enable self-voicing as well as gesture control by default
         if ( self.enableSelfVoicing ) {
             queryParameters = "\(queryParameters)&supportsSelfVoicing"
+        }
+        if ( self.enableCustomGesture ) {
+            queryParameters = "\(queryParameters)&supportsGestureControl"
         }
         
         return queryParameters;

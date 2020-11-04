@@ -28,6 +28,7 @@ public class VibrationManager {
                                            value: 0.5)
     
     var engine: CHHapticEngine!
+    var initialized = false;
     
     // the player while a vibration is active, if dynamic parameters are changed they are sent to this
     var activePlayer: CHHapticAdvancedPatternPlayer!
@@ -36,15 +37,16 @@ public class VibrationManager {
     
     private func init_engine(){
         do {
-            engine = try CHHapticEngine()
+            
+            // only start the haptic engine once for the lifetime of the application
+            if ( !initialized ) {
+                initialized = true;
+                engine = try CHHapticEngine()
+            }
             try self.engine.start()
         } catch let error {
             fatalError("Engine Creation Error: \(error)")
         }
-    }
-    
-    init(){
-        
     }
     
     public func quickPulse(seconds: Double){
