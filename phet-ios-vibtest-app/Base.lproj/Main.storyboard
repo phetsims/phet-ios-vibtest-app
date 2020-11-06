@@ -62,7 +62,7 @@
                                     <constraint firstAttribute="height" constant="115" id="QnI-8J-2HK"/>
                                 </constraints>
                             </pickerView>
-                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-X9-1jq">
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-X9-1jq">
                                 <rect key="frame" x="47" y="244" width="320" height="216"/>
                                 <accessibility key="accessibilityConfiguration" label="Vibration">
                                     <accessibilityTraits key="traits" adjustable="YES"/>

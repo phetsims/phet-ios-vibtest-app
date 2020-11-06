@@ -61,7 +61,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.hapticPicker.tag = 1; // so I can get this UI component in class functions
         
         simData = [ "John Travoltage", "Gravity Force Lab: Basics" ];
-        hapticData = [ "Prototype Design 1" ];
+        hapticData = [ "Prototype Design 1", "Prototype Design 2" ];
         
         // set accessibility attributes for VoiceOver
         self.idTextField.accessibilityLabel = "User ID";

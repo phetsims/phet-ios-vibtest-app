@@ -335,6 +335,9 @@ public class VibrationManager {
         // parameters for the CHHapticEvent
         let sharpnessParameter = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(sharpness) );
         
+        // setting a new vibration, set the relative intensity so that the intensity
+        // changes relative to the intensity requested in this vibrateContinuous request
+        self.activeIntensity = 1;
         let onIntensityParameter = CHHapticEventParameter(parameterID: .hapticIntensity,
                                                           value: Float(intensity) );
         
@@ -641,6 +644,7 @@ public class VibrationManager {
             do {
                 print( "intensity: \(self.activeIntensity)" );
                 try self.activePlayer.sendParameters( [ intensityParameter ], atTime: 0 );
+                print( "value: \(proposedIntensity)" )
             }
             catch let error {
                 print( "Error setting dynamic intensity: \(error)")

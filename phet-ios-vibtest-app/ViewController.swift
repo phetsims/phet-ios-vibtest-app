@@ -55,13 +55,14 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     // maps the selected value from the UIPickerView to the query parameter for the url to select
     // haptic feedback
     let hapticSelectionMap = [
-        "Prototype Design 1": "1"
+        "Prototype Design 1": "1",
+        "Prototype Design 2": "2"
     ];
     
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
-        "Gravity Force Lab: Basics": "1.1.0-dev.20",
-        "John Travoltage": "1.6.0-dev.36"
+        "Gravity Force Lab: Basics": "1.1.0-dev.22",
+        "John Travoltage": "1.6.0-dev.38"
     ];
 
     override func viewDidLoad() {
@@ -242,7 +243,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     }
     
     func getQueryParameters() -> String {
-        let hapticSelectionString = self.hapticSelectionMap[self.hapticSelection ]!;
+        let hapticSelectionString = self.hapticSelectionMap[ self.hapticSelection ]!;
         
         // query parameters that enable vibration, selected vibration paradigm, and
         // enhanced sound by default
