@@ -24,7 +24,6 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     @IBOutlet weak var customGestureSwitch: UISwitch!
     
     var simData: [String] = [String]()
-    var hapticData: [String] = [String]()
     var p_id: Int = 0
     
     // description of the selected haptic feedback, in case it is useful - commented out
@@ -61,7 +60,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         self.hapticPicker.tag = 1; // so I can get this UI component in class functions
         
         simData = [ "John Travoltage", "Gravity Force Lab: Basics" ];
-        hapticData = [ "Prototype Design 1", "Prototype Design 2" ];
+
         
         // set accessibility attributes for VoiceOver
         self.idTextField.accessibilityLabel = "User ID";
@@ -98,7 +97,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             return simData.count;
         }
         else if ( pickerView.tag == 1 ) {
-            return hapticData.count;
+            return Constants.paradigmSelection.count;
         }
         else {
             return 0;
@@ -110,7 +109,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             return simData[ row ];
         }
         else if ( pickerView.tag == 1 ) {
-            return hapticData[ row ];
+            return Constants.paradigmSelection[ row ].paradigmName;
         }
         else {
             return "ERROR";
@@ -120,7 +119,7 @@ class LandingController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     override func prepare( for segue: UIStoryboardSegue, sender: Any? ) {
         if let nextViewController = segue.destination as? ViewController {
             nextViewController.simSelection = simData[ picker.selectedRow( inComponent: 0 ) ];
-            nextViewController.hapticSelection = hapticData[ hapticPicker.selectedRow( inComponent: 0 ) ]
+            nextViewController.hapticSelection = Constants.paradigmSelection[ hapticPicker.selectedRow( inComponent: 0 ) ].paradigmName;
             nextViewController.participantId = self.idTextField.text;
             nextViewController.enableSelfVoicing = selfVoicingSwitch.isOn;
             nextViewController.enableCustomGesture = customGestureSwitch.isOn;

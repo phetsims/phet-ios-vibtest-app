@@ -29,6 +29,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     let vibrateWithCustomPatternForeverMessageHandler = "vibrateWithCustomPatternForeverMessageHandler"
     let vibrateWithCustomPatternDurationMessageHandler = "vibrateWithCustomPatternDurationMessageHandler"
     let vibrationIntensityMessageHandler = "vibrationIntensityMessageHandler"
+    let vibrationSharpnessMessageHandler = "vibrationSharpnessMessageHandler"
     let vibrateContinuousMessageHandler = "vibrateContinuousMessageHandler"
     let vibrateTransientMessageHandler = "vibrateTransientMessageHandler"
     let debugMessageHandler = "debugMessageHandler"
@@ -52,16 +53,9 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         "John Travoltage": "john-travoltage"
     ];
     
-    // maps the selected value from the UIPickerView to the query parameter for the url to select
-    // haptic feedback
-    let hapticSelectionMap = [
-        "Prototype Design 1": "1",
-        "Prototype Design 2": "2"
-    ];
-    
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
-        "Gravity Force Lab: Basics": "1.1.0-dev.23",
+        "Gravity Force Lab: Basics": "1.1.0-dev.24",
         "John Travoltage": "1.6.0-dev.38"
     ];
 
@@ -82,6 +76,7 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         configuration.userContentController.add( self, name: debugMessageHandler );
         configuration.userContentController.add( self, name: saveDataMessageHandler );
         configuration.userContentController.add( self, name: vibrationIntensityMessageHandler );
+        configuration.userContentController.add( self, name: vibrationSharpnessMessageHandler );
         configuration.userContentController.add( self, name: vibrateContinuousMessageHandler );
         configuration.userContentController.add( self, name: vibrateTransientMessageHandler );
         webView = WKWebView( frame: .zero, configuration: configuration )
@@ -98,11 +93,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        //let urlString = self.getLocalSimURL();
+        let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        let urlString = self.getDeployedSimURL();
+        //let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -243,7 +238,12 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     }
     
     func getQueryParameters() -> String {
-        let hapticSelectionString = self.hapticSelectionMap[ self.hapticSelection ]!;
+        var hapticSelectionString = "";
+        for paradigmSelection in Constants.paradigmSelection {
+            if ( paradigmSelection.paradigmName == self.hapticSelection ) {
+                hapticSelectionString = paradigmSelection.paradigmNumber;
+            }
+        }
         
         // query parameters that enable vibration, selected vibration paradigm, and
         // enhanced sound by default
@@ -360,6 +360,15 @@ extension ViewController: WKScriptMessageHandler {
         
         VibrationMan?.setVibrationIntensity(intensity: intensity);
         
+    }
+    
+    if message.name == vibrationSharpnessMessageHandler {
+        guard let dict = message.body as? [String: AnyObject],
+            let intensity = dict["sharpness"] as? Double else {
+                return
+        }
+        
+        VibrationMan?.setVibrationSharpness( sharpness: intensity );
     }
 
     if ( message.name == vibrateContinuousMessageHandler ) {

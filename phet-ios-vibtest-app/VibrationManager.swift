@@ -34,6 +34,7 @@ public class VibrationManager {
     var activePlayer: CHHapticAdvancedPatternPlayer!
     
     var activeIntensity = 1.0;
+    var activeSharpness = 1.0
     
     private func init_engine(){
         do {
@@ -338,6 +339,7 @@ public class VibrationManager {
         // setting a new vibration, set the relative intensity so that the intensity
         // changes relative to the intensity requested in this vibrateContinuous request
         self.activeIntensity = 1;
+        self.activeSharpness = 1;
         let onIntensityParameter = CHHapticEventParameter(parameterID: .hapticIntensity,
                                                           value: Float(intensity) );
         
@@ -648,6 +650,26 @@ public class VibrationManager {
             }
             catch let error {
                 print( "Error setting dynamic intensity: \(error)")
+            }
+        }
+    }
+    
+    public func setVibrationSharpness( sharpness: Double ) {
+        
+        // Sending a dynamic parameter for sharpness will ADD the dynamic value to the
+        // value of the ORIGINAL pattern! Note, that is not the current pattern, but the
+        // pattern requested on initial vibration
+        let valueToSend = sharpness - self.activeSharpness;
+        
+        let sharpnessParameter = CHHapticDynamicParameter( parameterID: .hapticSharpnessControl, value: Float(valueToSend), relativeTime: 0)
+        
+        if ( self.activePlayer != nil ) {
+            do {
+                print( "sharpness: \(sharpness)" );
+                try self.activePlayer.sendParameters( [ sharpnessParameter ], atTime: 0 );
+            }
+            catch let error {
+                print( "Error setting dynamic sharpnes: \(error)")
             }
         }
     }
