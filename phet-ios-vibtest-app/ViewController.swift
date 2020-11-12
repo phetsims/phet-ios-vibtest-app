@@ -115,6 +115,10 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
             VibrationMan = VibrationManager()
         }
         
+        // display a title for the paradigm
+        // NOTE: Remove when ready for testing
+        self.navigationItem.title = self.hapticSelection;
+        
         // we use a custom navigation item to create a waning dialog before going back
         self.navigationItem.hidesBackButton = true;
         let newBackButton = UIBarButtonItem( title: "\u{2190} Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ViewController.back(sender:)) );
