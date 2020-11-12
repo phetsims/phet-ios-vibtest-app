@@ -55,8 +55,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     
     // maps the selected sim to the deployed version to test
     let deployedSimVersionMap = [
-        "Gravity Force Lab: Basics": "1.1.0-dev.24",
-        "John Travoltage": "1.6.0-dev.38"
+        "Gravity Force Lab: Basics": "1.1.0-dev.25",
+        "John Travoltage": "1.6.0-dev.39"
     ];
 
     override func viewDidLoad() {
