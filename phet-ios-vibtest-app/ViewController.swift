@@ -93,11 +93,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        //let urlString = self.getLocalSimURL();
+        let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        let urlString = self.getDeployedSimURL();
+        //let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
