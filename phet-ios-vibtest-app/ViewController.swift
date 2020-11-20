@@ -37,8 +37,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     private var VibrationMan: VibrationManager?
     
     // data from interviews is sent to this address
-    //private let emailAddress = "Jen.Tennison@SLU.edu";
-    private let emailAddress = "jesse.greenberg@colorado.edu";
+    private let emailAddress = "Jen.Tennison@SLU.edu";
+    //private let emailAddress = "jesse.greenberg@colorado.edu";
     
     // selections for sim and haptic output, set by user selection from previous scene
     public var simSelection: String!;
