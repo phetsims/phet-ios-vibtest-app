@@ -10,7 +10,7 @@ import Foundation
 
 struct Constants {
     static let paradigmSelection = [
-        ParadigmSelection( paradigmName: "Exponential Int, Linear Sharpness", paradigmNumber: "1" )
+        ParadigmSelection( paradigmName: "Paradigm 1", paradigmNumber: "1" )
     ];
 }
 
