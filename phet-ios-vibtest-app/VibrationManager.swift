@@ -333,6 +333,8 @@ public class VibrationManager {
         // if duration is nil, we will loop this pattern forever
         let loopForever = duration == nil;
         
+        print( "starting vibration" );
+        
         // parameters for the CHHapticEvent
         let sharpnessParameter = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(sharpness) );
         

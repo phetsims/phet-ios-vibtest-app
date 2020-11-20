@@ -37,8 +37,8 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
     private var VibrationMan: VibrationManager?
     
     // data from interviews is sent to this address
-    private let emailAddress = "Jen.Tennison@SLU.edu";
-    //private let emailAddress = "jesse.greenberg@colorado.edu";
+    //private let emailAddress = "Jen.Tennison@SLU.edu";
+    private let emailAddress = "jesse.greenberg@colorado.edu";
     
     // selections for sim and haptic output, set by user selection from previous scene
     public var simSelection: String!;
@@ -93,11 +93,11 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // a URL for the sim from user choices pulling from local server, used
         // for development - see function to change localhost address
-        //let urlString = self.getLocalSimURL();
+        let urlString = self.getLocalSimURL();
         
         // a URL for the sim from user selection that will go to a deployed
         // version, for testing
-        let urlString = self.getDeployedSimURL();
+        //let urlString = self.getDeployedSimURL();
         print( urlString );
 
         if let url = URL( string: urlString ) {
@@ -132,21 +132,21 @@ class ViewController: UIViewController, WKUIDelegate, MFMailComposeViewControlle
         
         // TODO: FOR NOW - just go back, but when it is time for testing, open a Dialog
         // that will save user data
-        self.navigationController?.popViewController(animated: true);
+        // self.navigationController?.popViewController(animated: true);
 
         // TODO: This is what requests saving/sending of user data
 //        // send a message to the webview to save data - this in turn will send the
 //        // data back to the containing app
-//        self.webView.evaluateJavaScript(
-//
-//            // post a message, to be caught in the sim window that indicates
-//            // that we would like to send data back to the app
-//            "window.postMessage( 'requestVibrationData', '*' );"
-//        ) { (result, error) in
-//            if error != nil {
-//                print(result);
-//            }
-//        };
+        self.webView.evaluateJavaScript(
+
+            // post a message, to be caught in the sim window that indicates
+            // that we would like to send data back to the app
+            "window.postMessage( 'requestVibrationData', '*' );"
+        ) { (result, error) in
+            if error != nil {
+                print(result ?? "Error saving data" );
+            }
+        };
             
             
 //            let alert = UIAlertController(title: "Are you sure you want to go back?", message: "Please save and send data before going back.", preferredStyle: .alert );
